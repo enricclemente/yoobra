@@ -137,3 +137,32 @@
     root.setAttribute('data-slide', '0');
   });
 })();
+
+// Sticky CTA bar: shows as soon as you scroll, hides near the footer and while the
+// Fit Finder section (which already offers the same action) is on screen
+(function () {
+  const bar = document.querySelector('.sticky-cta');
+  const hero = document.querySelector('.hero');
+  if (!bar || !hero) return;
+  const footer = document.querySelector('.footer');
+  const fit = document.querySelector('.fit');
+  const links = bar.querySelectorAll('a');
+  let pastHero = false, footerIn = false, fitIn = false;
+
+  const update = () => {
+    const show = pastHero && !footerIn && !fitIn;
+    bar.classList.toggle('is-visible', show);
+    bar.setAttribute('aria-hidden', String(!show));
+    links.forEach((a) => a.tabIndex = show ? 0 : -1);
+    document.body.classList.toggle('has-sticky-cta', show);
+  };
+
+  const onScroll = () => {
+    const next = window.scrollY > 120;
+    if (next !== pastHero) { pastHero = next; update(); }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+  if (footer) new IntersectionObserver(([e]) => { footerIn = e.isIntersecting; update(); }).observe(footer);
+  if (fit) new IntersectionObserver(([e]) => { fitIn = e.isIntersecting; update(); }, { threshold: 0.35 }).observe(fit);
+})();
