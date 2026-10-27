@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>yoobra · Because no two are the same</title>
+  <meta name="description" content="A bespoke bra system with two independently adjustable cups. Customise each side with yooboost™ inserts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Announcement -->
+  <div class="announcement">A bespoke bra system that shapes to your body.</div>
+
+  <!-- Navigation -->
+  <header class="nav">
+    <div class="nav__bar">
+      <div class="nav__left">
+        <button class="icon-btn nav__menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <img src="assets/icon-menu.svg" alt="" width="22" height="22">
+        </button>
+        <a class="icon-btn nav__search-m" href="/search" aria-label="Search">
+          <img src="assets/icon-search-m.svg" alt="" width="22" height="22">
+        </a>
+      </div>
+
+      <a class="nav__brand" href="/" aria-label="yoobra home">
+        <img class="nav__logo" src="assets/logo.svg" alt="yoobra" width="120" height="32">
+      </a>
+
+      <nav class="nav__menu" aria-label="Main">
+        <a href="/collections/all">Shop <img src="assets/icon-chevron-down.svg" alt="" width="12" height="12"></a>
+        <a href="/pages/how-it-works">How it works <img src="assets/icon-chevron-down.svg" alt="" width="12" height="12"></a>
+        <a href="/pages/fit-finder">Fit &amp; sizing <img src="assets/icon-chevron-down.svg" alt="" width="12" height="12"></a>
+        <a href="/pages/about-us">Our story <img src="assets/icon-chevron-down.svg" alt="" width="12" height="12"></a>
+      </nav>
+
+      <div class="nav__utilities">
+        <a class="icon-btn nav__search" href="/search" aria-label="Search"><img src="assets/icon-search.svg" alt="" width="20" height="20"></a>
+        <a class="icon-btn nav__account" href="/account" aria-label="Account"><img src="assets/icon-account.svg" alt="" width="20" height="20"></a>
+        <a class="nav__bag" href="/cart" aria-label="Bag, 0 items">
+          <img class="nav__bag-d" src="assets/icon-bag.svg" alt="" width="20" height="20">
+          <img class="nav__bag-m" src="assets/icon-bag-m.svg" alt="" width="22" height="22">
+          <span class="nav__bag-count">0</span>
+        </a>
+        <a class="btn btn--cream nav__cta" href="/pages/fit-finder">Find my fit</a>
+      </div>
+    </div>
+
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" hidden>
+      <a href="/collections/all">Shop</a>
+      <a href="/pages/how-it-works">How it works</a>
+      <a href="/pages/fit-finder">Fit &amp; sizing</a>
+      <a href="/pages/about-us">Our story</a>
+      <a href="/account">Account</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="hero">
+      <img class="hero__media" src="assets/hero-grid.jpg" alt="" aria-hidden="true">
+      <div class="hero__overlay"></div>
+
+      <div class="hero__controls">
+        <button class="glass-btn" type="button" aria-label="Pause video" data-toggle="pause">
+          <img src="assets/icon-pause.svg" alt="" width="16" height="16">
+        </button>
+        <button class="glass-btn" type="button" aria-label="Unmute video" data-toggle="sound">
+          <img src="assets/icon-sound-off.svg" alt="" width="18" height="18">
+        </button>
+      </div>
+
+      <div class="hero__statement">
+        <h1 class="hero__title">Because no two are the same.</h1>
+        <div class="hero__actions">
+          <a class="btn btn--cream btn--shadow" href="/products/yoobra-adore">
+            Shop the Adore <img src="assets/icon-arrow.svg" alt="" width="14" height="14">
+          </a>
+          <a class="btn btn--glass" href="/pages/how-it-works">How it works</a>
+        </div>
+      </div>
+
+      <a class="fit-invite" href="/pages/fit-finder">
+        <span class="fit-invite__icon"><img src="assets/icon-rings-sm.svg" alt="" width="20" height="12"></span>
+        <span class="fit-invite__text">
+          <span class="fit-invite__title">Find your fit</span>
+          <span class="fit-invite__meta">
+            <span class="fit-invite__steps" aria-hidden="true"><i class="is-active"></i><i></i><i></i><i></i><i></i><i></i></span>
+            6 questions · 2 min
+          </span>
+        </span>
+        <span class="fit-invite__arrow"><img src="assets/icon-arrow-light.svg" alt="" width="14" height="14"></span>
+      </a>
+    </section>
+
+    <!-- Proof + asymmetry -->
+    <section class="story">
+      <div class="proof">
+        <div class="proof__item">
+          <h2 class="proof__title">One bra.</h2>
+          <p class="proof__body">A bespoke bra system that puts you in control. Switch your look whenever you need to.</p>
+        </div>
+        <div class="proof__divider" aria-hidden="true"></div>
+        <div class="proof__item">
+          <h2 class="proof__title">Two independently adjustable cups.</h2>
+          <p class="proof__body">Lift, shape or balance each cup, creating a customised fit that’s entirely yours.</p>
+        </div>
+      </div>
+
+      <div class="edu">
+        <div class="media-card edu__media">
+          <img class="media-card__img" src="assets/edu-gallery.jpg" alt="A bra held up showing two cups of different fullness">
+          <div class="anno" style="--x:30.15%; --top:36px; --h:182px; --x-m:30.15%; --top-m:24px; --h-m:123px">
+            <span class="anno__label">Fuller side</span><span class="anno__leader"></span><img class="anno__dot" src="assets/dot.svg" alt="" width="20" height="20">
+          </div>
+          <div class="anno" style="--x:68.05%; --top:36px; --h:182px; --x-m:68.15%; --top-m:24px; --h-m:123px">
+            <span class="anno__label">Lighter side</span><span class="anno__leader"></span><img class="anno__dot" src="assets/dot.svg" alt="" width="20" height="20">
+          </div>
+          <div class="pager" aria-hidden="true"><i class="is-active"></i><i></i><i></i></div>
+          <div class="arrows">
+            <button class="arrow-btn" type="button" aria-label="Previous slide"><img src="assets/icon-prev.svg" alt="" width="14" height="14"></button>
+            <button class="arrow-btn" type="button" aria-label="Next slide"><img src="assets/icon-next.svg" alt="" width="14" height="14"></button>
+          </div>
+        </div>
+
+        <div class="edu__content">
+          <p class="edu__stat">94%</p>
+          <h2 class="h-display edu__title">of women in the UK <br class="d-only">have uneven boobs.</h2>
+          <p class="edu__body">Somehow, the bra industry missed the memo. For decades it’s been pretending two identical cups make perfect sense. They don’t.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Versatility -->
+    <section class="looks">
+      <div class="looks__head">
+        <p class="eyebrow eyebrow--sm">Choose your yooboost™</p>
+        <h2 class="h-display">Customise each cup <br class="d-only">with our unique bra technology.</h2>
+      </div>
+
+      <div class="looks__grid swipe" data-carousel>
+        <article class="look-card">
+          <div class="media-card look-card__media">
+            <img class="media-card__img" src="assets/look-1.jpg" alt="Layered yooboost inserts">
+            <div class="anno anno--sm" style="--x:50.2%; --top:28px; --h:139px; --x-m:56.2%; --top-m:16px; --h-m:83px">
+              <span class="anno__label">Layered inserts</span><span class="anno__leader"></span><img class="anno__dot" src="assets/dot.svg" alt="" width="20" height="20">
+            </div>
+            <div class="pager pager--sm d-only" aria-hidden="true"><i class="is-active"></i><i></i><i></i></div>
+            <div class="arrows arrows--sm">
+              <button class="arrow-btn" type="button" aria-label="Previous slide"><img src="assets/icon-prev.svg" alt="" width="14" height="14"></button>
+              <button class="arrow-btn" type="button" aria-label="Next slide"><img src="assets/icon-next.svg" alt="" width="14" height="14"></button>
+            </div>
+          </div>
+          <div class="look-card__copy">
+            <p class="look-card__label">yooboost™ 1</p>
+            <h3 class="look-card__title">Subtle everyday lift</h3>
+          </div>
+        </article>
+
+        <article class="look-card">
+          <div class="media-card look-card__media">
+            <img class="media-card__img" src="assets/look-2.jpg" alt="Gold adjuster on a yoobra strap">
+            <div class="anno anno--sm" style="--x:60%; --top:28px; --h:252px; --x-m:67.6%; --top-m:16px; --h-m:153px">
+              <span class="anno__label">Gold adjuster</span><span class="anno__leader"></span><img class="anno__dot" src="assets/dot.svg" alt="" width="20" height="20">
+            </div>
+            <div class="pager pager--sm d-only" aria-hidden="true"><i class="is-active"></i><i></i><i></i></div>
+            <div class="arrows arrows--sm">
+              <button class="arrow-btn" type="button" aria-label="Previous slide"><img src="assets/icon-prev.svg" alt="" width="14" height="14"></button>
+              <button class="arrow-btn" type="button" aria-label="Next slide"><img src="assets/icon-next.svg" alt="" width="14" height="14"></button>
+            </div>
+          </div>
+          <div class="look-card__copy">
+            <p class="look-card__label">yooboost™ 2</p>
+            <h3 class="look-card__title">More volume and shape</h3>
+          </div>
+        </article>
+
+        <article class="look-card">
+          <div class="media-card look-card__media">
+            <img class="media-card__img" src="assets/look-3.jpg" alt="The signature yoobra clasp">
+            <div class="anno anno--sm" style="--x:42.2%; --top:28px; --h:101px; --x-m:47.3%; --top-m:16px; --h-m:60px">
+              <span class="anno__label">Signature clasp</span><span class="anno__leader"></span><img class="anno__dot" src="assets/dot.svg" alt="" width="20" height="20">
+            </div>
+            <div class="pager pager--sm d-only" aria-hidden="true"><i class="is-active"></i><i></i><i></i></div>
+            <div class="arrows arrows--sm">
+              <button class="arrow-btn" type="button" aria-label="Previous slide"><img src="assets/icon-prev.svg" alt="" width="14" height="14"></button>
+              <button class="arrow-btn" type="button" aria-label="Next slide"><img src="assets/icon-next.svg" alt="" width="14" height="14"></button>
+            </div>
+          </div>
+          <div class="look-card__copy">
+            <p class="look-card__label">Create your perfect fit</p>
+            <h3 class="look-card__title">Use one, both or layer them</h3>
+          </div>
+        </article>
+      </div>
+      <div class="dots m-only" aria-hidden="true"></div>
+
+      <a class="btn btn--wine looks__cta" href="/pages/the-yoobra-design">Explore the design</a>
+    </section>
+
+    <!-- Comparison -->
+    <section class="compare">
+      <div class="section-head">
+        <p class="eyebrow">Why we’re different</p>
+        <h2 class="h-display">Most bras are designed for one body. <br class="d-only">yoobra is shaped by you.</h2>
+      </div>
+
+      <div class="compare__grid swipe" data-carousel>
+        <div class="compare-card compare-card--plain">
+          <div class="compare-card__desc">
+            <p class="compare-card__label">Traditional bras</p>
+            <h3 class="compare-card__title">One fixed shape</h3>
+            <p class="compare-card__lead">Made as though both sides match, which you’ll know isn’t the case.</p>
+          </div>
+          <ul class="bullets">
+            <li><img src="assets/icon-x.svg" alt="" width="16" height="16">The same cup on both sides</li>
+            <li><img src="assets/icon-x.svg" alt="" width="16" height="16">Gapes, digs, squeezes, frustrates</li>
+            <li><img src="assets/icon-x.svg" alt="" width="16" height="16">One look per bra, whatever you’re wearing</li>
+          </ul>
+        </div>
+
+        <div class="compare-card compare-card--brand">
+          <div class="compare-card__desc">
+            <img class="compare-card__logo" src="assets/logo-peach.svg" alt="yoobra" width="80" height="21">
+            <h3 class="compare-card__title">Independent control</h3>
+            <p class="compare-card__lead">Each side is adjusted separately, so the bra works with the two you’ve got.</p>
+          </div>
+          <ul class="bullets">
+            <li><img src="assets/icon-check.svg" alt="" width="16" height="16">Customise each cup individually</li>
+            <li><img src="assets/icon-check.svg" alt="" width="16" height="16">Cushioned straps and clever wing cuts for all-day support</li>
+            <li><img src="assets/icon-check.svg" alt="" width="16" height="16">Use the yooboost™ system to change your look</li>
+          </ul>
+          <a class="btn btn--cream" href="/products/yoobra-adore">Shop the Adore</a>
+        </div>
+      </div>
+      <div class="dots m-only" aria-hidden="true"></div>
+    </section>
+
+    <!-- Fit Finder -->
+    <section class="fit gradient-wine">
+      <div class="fit__copy">
+        <p class="eyebrow eyebrow--peach">Fit Finder · Takes 2 minutes</p>
+        <h2 class="h-display">Not sure of your size? <br class="d-only">We can help with that.</h2>
+        <p class="fit__body">Answer six quick questions. It’ll only take a few minutes, and you’ll get tailored results to help you find your perfect fit.</p>
+        <div class="fit__actions">
+          <a class="btn btn--cream btn--wine-text" href="/pages/fit-finder">Start the Fit Finder</a>
+        </div>
+      </div>
+
+      <div class="quiz" role="group" aria-labelledby="quiz-q">
+        <div class="quiz__progress">
+          <div class="quiz__row">
+            <span class="quiz__count">Question 2 of 6</span>
+            <span class="quiz__topic">Asymmetry</span>
+          </div>
+          <div class="quiz__bar"><span></span></div>
+        </div>
+        <p class="quiz__question" id="quiz-q">Which side feels fuller?</p>
+        <div class="quiz__choices">
+          <a class="quiz__choice is-selected" href="/pages/fit-finder?fuller=left">
+            <img src="assets/icon-sides-left.svg" alt="" width="48" height="32"><span>Left</span>
+          </a>
+          <a class="quiz__choice" href="/pages/fit-finder?fuller=right">
+            <img src="assets/icon-sides-right.svg" alt="" width="52" height="32"><span>Right</span>
+          </a>
+          <a class="quiz__choice" href="/pages/fit-finder?fuller=same">
+            <img src="assets/icon-sides-same.svg" alt="" width="51" height="32"><span><span class="d-only-inline">About the </span><span class="cap-m">same</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product theatre -->
+    <section class="theatre">
+      <img class="theatre__media" src="assets/theatre.jpg" alt="" aria-hidden="true">
+      <div class="theatre__overlay"></div>
+      <div class="theatre__statement">
+        <p class="eyebrow eyebrow--white">Confidence, not correction</p>
+        <h2 class="theatre__title">Feel like your <br>best self.</h2>
+        <p class="theatre__body">yoobra changes what you see in the mirror.</p>
+        <a class="btn btn--cream" href="/pages/yoobra-sisters">Read their stories</a>
+      </div>
+    </section>
+
+    <!-- Recognition -->
+    <section class="recog">
+      <div class="recog__head">
+        <div class="recog__title">
+          <img class="motif" src="assets/rings-wine.svg" alt="" width="42" height="24">
+          <p class="eyebrow">We see you</p>
+          <h2 class="h-display">If your bra fits one side, but not the other, you’re not alone.</h2>
+        </div>
+        <div class="recog__body">
+          <p>Bras are symmetrical. Real bodies aren’t. That mismatch shows up as gaping, digging and clothes that never sit right.</p>
+          <a class="btn btn--wine" href="/pages/fit-finder">Find my fit</a>
+        </div>
+      </div>
+
+      <div class="recog__cards swipe" data-carousel>
+        <div class="recog-card">
+          <span class="recog-card__num">01</span>
+          <div>
+            <h3 class="recog-card__title">One cup gaps</h3>
+            <p class="recog-card__body">One side feels right, and the other never quite does.</p>
+          </div>
+        </div>
+        <div class="recog-card">
+          <span class="recog-card__num">02</span>
+          <div>
+            <h3 class="recog-card__title">Straps can’t fix it</h3>
+            <p class="recog-card__body">You tighten and loosen, but balance won’t come.</p>
+          </div>
+        </div>
+        <div class="recog-card">
+          <span class="recog-card__num">03</span>
+          <div>
+            <h3 class="recog-card__title">Outfit is a nope</h3>
+            <p class="recog-card__body">Certain shapes are off limits, so you’ve stopped trying.</p>
+          </div>
+        </div>
+      </div>
+      <div class="dots m-only" aria-hidden="true"></div>
+    </section>
+
+    <!-- Founder -->
+    <section class="founder gradient-wine">
+      <div class="founder__image">
+        <img src="assets/founder.jpg" alt="Becky Cawthorn-Smith, founder of yoobra">
+      </div>
+      <div class="founder__copy">
+        <div class="founder__eyebrow">
+          <img class="motif" src="assets/rings-peach.svg" alt="" width="42" height="24">
+          <p class="eyebrow eyebrow--peach eyebrow--12">Becky Cawthorn-Smith · Founder</p>
+        </div>
+        <blockquote class="founder__quote">“I realised so many women, like me, were ‘quietly coping’ every day.”</blockquote>
+        <p class="founder__body">They weren’t being seen or served – just simply making do: adjusting straps, removing padding from one side, stuffing it into the other, abandoning outfits because something just didn’t sit right. With not a single customisable option available. Until now.</p>
+        <a class="fit-bar fit-bar--founder m-only" href="/pages/fit-finder">
+          <span class="fit-bar__icon"><img src="assets/icon-rings-bar.svg" alt="" width="30" height="18"></span>
+          <span class="fit-bar__text"><strong>Find your fit in 2 minutes</strong><small>Size and insert set-up for each side</small></span>
+          <span class="fit-bar__arrow"><img src="assets/icon-arrow-bar.svg" alt="" width="16" height="16"></span>
+        </a>
+        <a class="btn btn--cream" href="/pages/about-us">Read our story</a>
+      </div>
+    </section>
+
+    <!-- Instagram -->
+    <section class="insta">
+      <div class="insta__head">
+        <div class="insta__title">
+          <a class="insta__handle" href="https://www.instagram.com/yoobralife" target="_blank" rel="noopener">
+            <img src="assets/icon-instagram.svg" alt="" width="18" height="18">@yoobralife
+          </a>
+          <h2 class="h-display insta__h">Real women, real fit.</h2>
+          <p class="insta__sub">How our community wears Yoobra, every day.</p>
+        </div>
+        <a class="btn btn--outline" href="https://www.instagram.com/yoobralife" target="_blank" rel="noopener">
+          <img src="assets/icon-instagram.svg" alt="" width="18" height="18">Follow on Instagram
+        </a>
+      </div>
+      <div class="insta__grid swipe" data-carousel>
+        <a class="insta-post" href="https://www.instagram.com/yoobralife" target="_blank" rel="noopener"><img src="assets/clasp.jpg" alt="Signature clasp detail"><span class="insta-post__badge"><img src="assets/icon-instagram-white.svg" alt="" width="16" height="16"></span></a>
+        <a class="insta-post" href="https://www.instagram.com/yoobralife" target="_blank" rel="noopener"><img src="assets/look-1.jpg" alt="yooboost inserts"><span class="insta-post__badge"><img src="assets/icon-instagram-white.svg" alt="" width="16" height="16"></span></a>
+        <a class="insta-post" href="https://www.instagram.com/yoobralife" target="_blank" rel="noopener"><img src="assets/lace.jpg" alt="Lace detail"><span class="insta-post__badge"><img src="assets/icon-instagram-white.svg" alt="" width="16" height="16"></span></a>
+        <a class="insta-post" href="https://www.instagram.com/yoobralife" target="_blank" rel="noopener"><img src="assets/inserts-bag.jpg" alt="Insert and satin bag"><span class="insta-post__badge"><img src="assets/icon-instagram-white.svg" alt="" width="16" height="16"></span></a>
+        <a class="insta-post" href="https://www.instagram.com/yoobralife" target="_blank" rel="noopener"><img src="assets/strap.jpg" alt="Strap adjuster"><span class="insta-post__badge"><img src="assets/icon-instagram-white.svg" alt="" width="16" height="16"></span></a>
+        <a class="insta-post" href="https://www.instagram.com/yoobralife" target="_blank" rel="noopener"><img src="assets/look-2.jpg" alt="Cup with clasp"><span class="insta-post__badge"><img src="assets/icon-instagram-white.svg" alt="" width="16" height="16"></span></a>
+      </div>
+      <div class="dots m-only" aria-hidden="true"></div>
+    </section>
+
+    <!-- Manifesto -->
+    <section class="manifesto gradient-coral">
+      <div class="manifesto__copy">
+        <div class="founder__eyebrow">
+          <img class="motif" src="assets/rings-cream.svg" alt="" width="42" height="24">
+          <p class="eyebrow eyebrow--cream">The Yoobra manifesto</p>
+        </div>
+        <h2 class="manifesto__title">Breasts. They were never a matching set.</h2>
+        <p class="manifesto__body">One changes. The other takes its time. Pregnancy. Periods. Weight. Age. Life. Things move.</p>
+      </div>
+
+      <div class="manifesto__band">
+        <img class="media-card__img" src="assets/inserts-bag.jpg" alt="yooboost inserts with the satin storage bag">
+        <div class="anno anno--plain d-only" style="--x:120.5px; --top:56px; --h:120px">
+          <span class="anno__label">Satin storage bag</span><span class="anno__leader"></span><img class="anno__dot" src="assets/ellipse.svg" alt="" width="8" height="8">
+        </div>
+        <div class="anno anno--plain d-only" style="--x:450.5px; --top:56px; --h:230px">
+          <span class="anno__label">yooboost™ inserts</span><span class="anno__leader"></span><img class="anno__dot" src="assets/ellipse.svg" alt="" width="8" height="8">
+        </div>
+        <div class="pager pager--square d-only" aria-hidden="true"><i class="is-active"></i><i></i><i></i></div>
+        <div class="arrows arrows--manifesto d-only">
+          <button class="arrow-btn" type="button" aria-label="Previous slide"><img src="assets/icon-prev.svg" alt="" width="14" height="14"></button>
+          <button class="arrow-btn" type="button" aria-label="Next slide"><img src="assets/icon-next.svg" alt="" width="14" height="14"></button>
+        </div>
+        <a class="fit-bar d-only" href="/pages/fit-finder">
+          <span class="fit-bar__icon"><img src="assets/icon-rings-bar.svg" alt="" width="30" height="18"></span>
+          <span class="fit-bar__text"><strong>Find your fit in 2 minutes</strong><small>Size and insert set-up for each side</small></span>
+          <span class="fit-bar__arrow"><img src="assets/icon-arrow-bar.svg" alt="" width="16" height="16"></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Care -->
+    <section class="care">
+      <div class="section-head">
+        <img class="motif" src="assets/rings-wine.svg" alt="" width="42" height="24">
+        <p class="eyebrow">Thoughtful details</p>
+        <h2 class="h-display">Like having a hug from your bra.</h2>
+        <p class="care__sub">Designed by women, for women.</p>
+      </div>
+      <div class="care__grid swipe" data-carousel>
+        <article class="care-card">
+          <img src="assets/strap.jpg" alt="Strap adjuster and lace">
+          <span class="care-card__num m-only">01</span>
+          <div class="care-card__copy">
+            <h3>Soft recycled lace</h3>
+            <p>Beautifully placed across the underarm to flatter and frame.</p>
+          </div>
+        </article>
+        <article class="care-card">
+          <img src="assets/lace.jpg" alt="Lace and bamboo lining">
+          <span class="care-card__num m-only">02</span>
+          <div class="care-card__copy">
+            <h3>Organic bamboo</h3>
+            <p>Cloud-soft, hypoallergenic lining that’s gentle against your skin.</p>
+          </div>
+        </article>
+        <article class="care-card">
+          <img src="assets/inserts-bag.jpg" alt="Insert with satin bag">
+          <span class="care-card__num m-only">03</span>
+          <div class="care-card__copy">
+            <h3>Cushioned straps</h3>
+            <p>Designed to ease the pressure and discomfort of heavy breasts.</p>
+          </div>
+        </article>
+        <article class="care-card">
+          <img src="assets/look-2.jpg" alt="Cup and wing detail">
+          <span class="care-card__num m-only">04</span>
+          <div class="care-card__copy">
+            <h3>Clever wing cuts</h3>
+            <p>For extra coverage, support and a smoother silhouette.</p>
+          </div>
+        </article>
+      </div>
+      <div class="dots m-only" aria-hidden="true"></div>
+    </section>
+
+    <!-- How the system works -->
+    <section class="system gradient-wine">
+      <div class="system__head">
+        <p class="eyebrow eyebrow--peach">Change your shape in seconds</p>
+        <h2 class="system__title">The bra that adjusts to you.</h2>
+        <p class="system__sub">yoobra and yooboost™ tailor each cup independently, so the fit follows the outfit.</p>
+      </div>
+      <div class="system__grid">
+        <ol class="system__steps">
+          <li class="step">
+            <span class="step__num">01</span>
+            <div><h3>Start with what you’ve got</h3><p>Our fit finder considers both boobs rather than averaging them.</p></div>
+          </li>
+          <li class="step">
+            <span class="step__num">02</span>
+            <div><h3>Customise each cup to suit you</h3><p>Use yooboost™ for subtle lift and balance, or layer for volume.</p></div>
+          </li>
+          <li class="step">
+            <span class="step__num">03</span>
+            <div><h3>Switch your shape whenever you want</h3><p>Adjust for the occasion, or a changing body, in seconds.</p></div>
+          </li>
+        </ol>
+        <div class="media-card system__media">
+          <img class="media-card__img" src="assets/system-diagram.jpg" alt="The yoobra bra with independent yooboost inserts">
+          <div class="anno" style="--x:39.95%; --top:28px; --h:156px; --x-m:30.7%; --top-m:16px; --h-m:102px">
+            <span class="anno__label">Adjustable cup</span><span class="anno__leader"></span><img class="anno__dot" src="assets/dot.svg" alt="" width="20" height="20">
+          </div>
+          <div class="anno" style="--x:71.95%; --top:24px; --h:54px; --x-m:70.7%; --top-m:16px; --h-m:36px">
+            <span class="anno__label">yooboost™ inserts</span><span class="anno__leader"></span><img class="anno__dot" src="assets/dot.svg" alt="" width="20" height="20">
+          </div>
+        </div>
+      </div>
+      <div class="system__actions">
+        <a class="btn btn--sm btn--cream" href="/pages/fit-finder">Find my fit</a>
+        <a class="btn btn--sm btn--line" href="/pages/how-it-works#yooboost">How yooboost™ works</a>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+      <div class="faq__intro">
+        <p class="eyebrow eyebrow--sm">How can we help?</p>
+        <h2 class="faq__title">FAQs</h2>
+        <p class="faq__body">Find the most frequently asked questions here. Can’t find the answer you need? Get in touch – we love talking about all things boobs.</p>
+      </div>
+
+      <div class="faq__cats">
+        <div class="faq-cat">
+          <div class="faq-cat__title">
+            <span class="faq-cat__num m-only">01</span>
+            <h3>Fit &amp; Sizing</h3>
+            <p>Finding your size and how each side is fitted.</p>
+          </div>
+          <div class="faq-cat__items">
+            <details class="acc" open>
+              <summary>What if I don’t know my bra size?</summary>
+              <p>Start with the Fit Finder. Six short questions give you a starting band, cup and insert set-up for each side.</p>
+            </details>
+            <details class="acc">
+              <summary>How does independent adjustment work?</summary>
+              <p>Answer to be confirmed.</p>
+            </details>
+            <details class="acc">
+              <summary>Can I get help from a person?</summary>
+              <p>Answer to be confirmed.</p>
+            </details>
+          </div>
+        </div>
+
+        <div class="faq-cat">
+          <div class="faq-cat__title">
+            <span class="faq-cat__num m-only">02</span>
+            <h3>The yooboost™ system</h3>
+            <p>How the inserts work and change with you.</p>
+          </div>
+          <div class="faq-cat__items">
+            <details class="acc">
+              <summary>Can my configuration change over time?</summary>
+              <p>Answer to be confirmed.</p>
+            </details>
+            <details class="acc">
+              <summary>What are the inserts made from?</summary>
+              <p>Answer to be confirmed.</p>
+            </details>
+            <details class="acc">
+              <summary>Is yoobra suitable after breast treatment?</summary>
+              <p>Answer to be confirmed.</p>
+            </details>
+          </div>
+        </div>
+
+        <div class="faq-cat">
+          <div class="faq-cat__title">
+            <span class="faq-cat__num m-only">03</span>
+            <h3>Orders &amp; Care</h3>
+            <p>Delivery, returns and looking after your bra.</p>
+          </div>
+          <div class="faq-cat__items">
+            <details class="acc">
+              <summary>How long does delivery take?</summary>
+              <p>Answer to be confirmed.</p>
+            </details>
+            <details class="acc">
+              <summary>What is your returns policy?</summary>
+              <p>Answer to be confirmed.</p>
+            </details>
+            <details class="acc">
+              <summary>How do I care for my yoobra?</summary>
+              <p>Answer to be confirmed.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+      <div class="newsletter__card">
+        <div class="newsletter__copy">
+          <p class="eyebrow">Welcome to boob democracy</p>
+          <h2 class="newsletter__title">Speaking your body language?</h2>
+          <p class="newsletter__privacy">Sign up to our emails and we promise we’ll only ever send interesting and relatable stuff.</p>
+        </div>
+        <form class="newsletter__form" novalidate>
+          <label class="visually-hidden" for="nl-email">Email address</label>
+          <input id="nl-email" type="email" name="email" placeholder="Email address" autocomplete="email" required>
+          <button class="btn btn--wine" type="submit">Join us</button>
+          <p class="newsletter__msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__statement">
+      <p class="footer__big">Because no two <br>are the same.</p>
+      <p class="footer__tag">One bra. Two independently adjustable cups.</p>
+    </div>
+
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="assets/logo-peach.svg" alt="yoobra" width="180" height="48">
+        <p class="footer__promise">A bespoke bra system <br>that shapes to your body.</p>
+        <p class="footer__contact">Get in touch · <a href="mailto:hellogorgeous@yoobralife.com">hellogorgeous@yoobralife.com</a></p>
+      </div>
+      <div class="footer__links">
+        <div class="footer__col">
+          <p class="footer__col-title">Shop</p>
+          <a href="/collections/all">The Yoobra system</a>
+          <a href="/pages/fit-finder">Fit Finder</a>
+          <a href="/pages/sizing">Sizing help</a>
+          <a href="/pages/delivery-returns">Delivery &amp; returns</a>
+        </div>
+        <div class="footer__col">
+          <p class="footer__col-title">Learn</p>
+          <a href="/pages/asymmetry">Asymmetry</a>
+          <a href="/pages/how-it-works#yooboost">How yooboost™ works</a>
+          <a href="/pages/body-changes">Body changes</a>
+          <a href="/pages/yoobra-sisters">Stories</a>
+        </div>
+        <div class="footer__col">
+          <p class="footer__col-title">About</p>
+          <a href="/pages/about-us">Founder story</a>
+          <a href="/pages/materials-care">Materials &amp; care</a>
+          <a href="/pages/contact">Contact</a>
+          <a href="/pages/press">Press</a>
+        </div>
+        <div class="footer__col">
+          <p class="footer__col-title">Follow</p>
+          <a href="https://www.instagram.com/yoobralife" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.tiktok.com/@yoobralife" target="_blank" rel="noopener">TikTok</a>
+          <a href="https://www.pinterest.com/yoobralife" target="_blank" rel="noopener">Pinterest</a>
+          <a href="/pages/community">Community</a>
+        </div>
+      </div>
+    </div>
+
+    <ul class="footer__payments" aria-label="Payment methods">
+      <li><img src="assets/pay-amex.svg" alt="American Express" width="42" height="29"></li>
+      <li><img src="assets/pay-applepay.svg" alt="Apple Pay" width="42" height="29"></li>
+      <li><img src="assets/pay-diners.svg" alt="Diners Club" width="42" height="29"></li>
+      <li><img src="assets/pay-amex.svg" alt="American Express" width="42" height="29"></li>
+      <li><img src="assets/pay-discover.svg" alt="Discover" width="42" height="29"></li>
+      <li><img src="assets/pay-mastercard.svg" alt="Mastercard" width="42" height="29"></li>
+      <li><img src="assets/pay-maestro.svg" alt="Maestro" width="42" height="29"></li>
+      <li><img src="assets/pay-stripe.svg" alt="Stripe" width="42" height="29"></li>
+      <li><img src="assets/pay-gpay.svg" alt="Google Pay" width="42" height="29"></li>
+      <li><img src="assets/pay-yandex.svg" alt="Yandex Pay" width="42" height="29"></li>
+      <li><img src="assets/pay-sofort.svg" alt="Sofort" width="42" height="29"></li>
+      <li><img src="assets/pay-klarna.svg" alt="Klarna" width="42" height="29"></li>
+      <li><img src="assets/pay-skrill.svg" alt="Skrill" width="42" height="29"></li>
+      <li><img src="assets/pay-fbpay.svg" alt="Facebook Pay" width="42" height="29"></li>
+    </ul>
+
+    <div class="footer__legal">
+      <p>© 2026 Yoobra. All rights reserved.</p>
+      <p class="footer__legal-links"><a href="/policies/privacy-policy">Privacy</a> · <a href="/policies/terms-of-service">Terms</a> · <a href="/pages/accessibility">Accessibility</a></p>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a class="whatsapp" href="https://wa.me/" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+    <img src="assets/icon-whatsapp.svg" alt="" width="28" height="28">
+  </a>
+
+  <script src="main.js" defer></script>
+</body>
+</html>
