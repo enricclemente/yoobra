@@ -454,3 +454,14 @@ html:not(.motion) .scroll-cue { display: none; }
   transition-duration: .9s;
   transition-timing-function: var(--ease-silk);
 }
+
+/* The Details bento */
+.motion .detail-card { transition: transform 1.2s var(--ease-silk), box-shadow 1.2s var(--ease-silk); }
+.motion .detail-card > img { transition: transform 2.4s var(--ease-silk); }
+.motion .detail-card::before { transition: opacity 1.2s var(--ease-silk); }
+.motion .detail-card__copy { transition: translate 1.2s var(--ease-silk); }
+.motion .detail-card__body { transition: color 1s var(--ease-silk); }
+.motion .detail-card:hover { box-shadow: 0 30px 60px rgba(74, 29, 44, 0.22); }
+.motion .detail-card:hover > img { transform: scale(1.06); }
+.motion .detail-card:hover .detail-card__copy { translate: 0 -6px; }
+.motion .detail-card:hover .detail-card__body { color: var(--cream); }

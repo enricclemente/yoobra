@@ -13,7 +13,7 @@
   const splitTargets = [
     '.hero__title', '.h-display', '.theatre__title', '.system__title',
     '.manifesto__title', '.founder__quote', '.faq__title', '.footer__big',
-    '.newsletter__title', '.proof__title', '.recog-card__title'
+    '.newsletter__title', '.proof__title', '.recog-card__title', '.details__h'
   ];
   function split(el) {
     if (el.dataset.split !== undefined) return;
@@ -69,6 +69,8 @@
   stagger('.recog__cards', '.recog-card');
   stagger('.insta__grid', '.insta-post', 'scale');
   stagger('.care__grid', '.care-card');
+  stagger('.details__bento', '.detail-card', 'scale');
+  tag('.details__intro', '', 150);
   stagger('.system__steps', '.step', 'left');
   stagger('.faq-cat__items', '.acc');
   stagger('.footer__links', '.footer__col');

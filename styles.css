@@ -1243,3 +1243,63 @@ body.has-sticky-cta .whatsapp { bottom: 112px; }
 @media (prefers-reduced-motion: reduce) {
   .sticky-cta { transition: opacity .2s linear; transform: none; }
 }
+
+/* --------------------------------------------------------------------------
+   The Details (bento) — from PDP · Section/The-Details
+   -------------------------------------------------------------------------- */
+.details { padding: 120px var(--pad-wide); display: flex; flex-direction: column; gap: 48px; }
+.details__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 48px; }
+.details__title { display: flex; flex-direction: column; gap: 16px; }
+.details__eyebrow { font-size: 11px; letter-spacing: 1.32px; line-height: normal; }
+.details__h { font-size: 52px; line-height: 1.05; letter-spacing: -1.3px; color: var(--wine); }
+.details__intro { width: 440px; flex: none; font-size: 18px; line-height: 1.5; color: var(--plum-700); }
+
+.details__bento { display: flex; gap: 16px; height: 640px; }
+.details__grid { flex: 1 1 0; min-width: 0; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 16px; }
+.detail-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px;
+  border-radius: 6px;
+  background: #2a1018;
+  min-height: 0;
+}
+.detail-card--hero { flex: 1 1 0; min-width: 0; padding: 24px 40px 40px; }
+.detail-card > img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; }
+.detail-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(26, 5, 13, 0) 35%, rgba(26, 5, 13, 0.6) 70%, rgba(26, 5, 13, 0.92) 100%);
+}
+.detail-card__copy { display: flex; flex-direction: column; gap: 6px; }
+.detail-card--hero .detail-card__copy { gap: 10px; }
+.detail-card__num { font-size: 11px; letter-spacing: 1.32px; color: rgba(255, 248, 245, 0.8); font-variant-numeric: lining-nums tabular-nums; }
+.detail-card__title { font-size: 22px; line-height: 1.1; letter-spacing: -0.55px; color: var(--cream); }
+.detail-card--hero .detail-card__title { font-size: 36px; letter-spacing: -0.9px; }
+.detail-card__body { font-size: 14px; line-height: 1.45; color: rgba(255, 248, 245, 0.85); }
+.detail-card--hero .detail-card__body { font-size: 16px; max-width: 420px; }
+
+@media (max-width: 1100px) and (min-width: 901px) {
+  .details__bento { height: 560px; }
+  .details__intro { width: 360px; }
+}
+
+@media (max-width: 900px) {
+  .details { padding: 64px 20px; gap: 32px; }
+  .details__head { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .details__h { font-size: 36px; line-height: 1; letter-spacing: -0.9px; }
+  .details__intro { width: 100%; font-size: 16px; }
+  .details__bento { flex-direction: column; height: auto; gap: 12px; }
+  .detail-card--hero { height: 440px; flex: none; padding: 24px; }
+  .detail-card--hero .detail-card__title { font-size: 28px; }
+  .details__grid { gap: 12px; grid-auto-rows: 240px; grid-template-rows: none; }
+  .detail-card { padding: 16px; }
+  .detail-card__title { font-size: 18px; }
+  .detail-card__body { font-size: 13px; }
+}
