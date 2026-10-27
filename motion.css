@@ -258,7 +258,7 @@ html:not(.motion) .scroll-cue { display: none; }
 
 /* WhatsApp: simply fades in after the hero has settled */
 .motion .whatsapp { animation: wa-in 1.6s var(--ease-out) 3s both; }
-@keyframes wa-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes wa-in { from { opacity: 0; translate: 0 10px; } to { opacity: 1; translate: none; } }
 .motion .whatsapp:hover { transform: none; }
 
 /* Footer links */
@@ -310,4 +310,147 @@ html:not(.motion) .scroll-cue { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .scroll-progress, .scroll-cue { display: none; }
   .slides .slide { transition: none; scale: none; }
+}
+
+/* ==========================================================================
+   Hover · more presence (still slow and soft)
+   ========================================================================== */
+
+/* Buttons: colour fills up from the base like ink */
+.motion .btn { position: relative; overflow: hidden; isolation: isolate; }
+.motion .btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: scaleY(0);
+  transform-origin: 50% 100%;
+  transition: transform .8s var(--ease-silk);
+}
+.motion .btn:hover::before { transform: scaleY(1); }
+.motion .btn { transition: color .8s var(--ease-silk), letter-spacing .8s var(--ease-silk), border-color .8s var(--ease-silk), box-shadow .8s var(--ease-silk), background-color .8s var(--ease-silk); }
+
+.motion .btn--cream::before { background: var(--wine); }
+.motion .btn--cream:hover { color: var(--cream); background: var(--cream); box-shadow: 0 14px 34px rgba(26, 5, 13, 0.22); }
+.motion .btn--cream:hover img { filter: brightness(0) invert(.97); }
+
+.motion .btn--wine::before { background: var(--plum-900); }
+.motion .btn--wine:hover { box-shadow: 0 14px 34px rgba(74, 29, 44, 0.28); }
+
+.motion .btn--glass::before,
+.motion .btn--line::before { background: var(--cream); }
+.motion .btn--glass:hover,
+.motion .btn--line:hover { color: var(--plum-700); border-color: var(--cream); background: transparent; }
+
+.motion .btn--outline::before { background: var(--wine); }
+.motion .btn--outline:hover { color: var(--cream); border-color: var(--wine); }
+.motion .btn--outline img { transition: filter .8s var(--ease-silk), transform .9s var(--ease-silk); }
+.motion .btn--outline:hover img { filter: brightness(0) invert(.97); transform: none; }
+
+.motion .btn:hover img { transform: translateX(5px); }
+
+/* Nav links brighten */
+.motion .nav__menu a:hover { color: #fff; }
+.motion .nav__utilities .icon-btn img,
+.motion .nav__bag img { transition: opacity .6s var(--ease-silk), transform .8s var(--ease-silk); }
+.motion .nav__utilities .icon-btn:hover img,
+.motion .nav__bag:hover img { transform: translateY(-2px); }
+
+/* Cards: clear lift, deeper shadow */
+.motion .look-card:hover,
+.motion .care-card:hover,
+.motion .recog-card:hover,
+.motion .compare-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(74, 29, 44, 0.18); }
+.motion .look-card:hover { background: rgba(255, 248, 245, 0.7); border-color: rgba(255, 255, 255, .9); }
+.motion .look-card:hover .slides { transform: translate3d(0, var(--py, 0px), 0) scale(1.14); }
+.motion .care-card:hover > img,
+.motion .system__media:hover .media-card__img { transform: scale(1.07); }
+.motion .insta-post:hover > img { transform: scale(1.08); }
+
+.motion .recog-card:hover { background: #f2dcd6; }
+.motion .recog-card__num, .motion .care-card h3, .motion .look-card__title, .motion .recog-card__title {
+  transition: color .9s var(--ease-silk), translate .9s var(--ease-silk);
+}
+.motion .recog-card:hover .recog-card__num { color: var(--wine); }
+.motion .look-card:hover .look-card__title,
+.motion .care-card:hover h3 { color: var(--wine); translate: 4px 0; }
+
+/* Instagram: deeper veil + badge brightens */
+.motion .insta-post::after { background: linear-gradient(180deg, rgba(74, 29, 44, .1) 30%, rgba(74, 29, 44, .6)); }
+.motion .insta-post__badge { transition: background-color .9s var(--ease-silk), border-color .9s var(--ease-silk); }
+.motion .insta-post:hover .insta-post__badge { background: rgba(255, 255, 255, .4); border-color: rgba(255, 255, 255, .8); }
+
+/* System steps */
+.motion .step { transition: background-color .9s var(--ease-silk), translate .9s var(--ease-silk); }
+.motion .step:hover { background: rgba(255, 248, 245, 0.14); translate: 6px 0; }
+.motion .step__num { transition: color .9s var(--ease-silk); }
+.motion .step:hover .step__num { color: var(--cream); }
+
+/* Quiz choices */
+.motion .quiz__choice { transition: background-color .8s var(--ease-silk), border-color .8s var(--ease-silk), translate .8s var(--ease-silk), box-shadow .8s var(--ease-silk); }
+.motion .quiz__choice:hover { translate: 0 -4px; border-color: rgba(110, 31, 53, .55); background: rgba(110, 31, 53, .08); box-shadow: 0 10px 24px rgba(74, 29, 44, .12); }
+.motion .quiz__choice img { transition: scale .9s var(--ease-silk); }
+.motion .quiz__choice:hover img { scale: 1.08; }
+
+/* Carousel arrows + glass controls */
+.motion .arrow-btn img, .motion .glass-btn img { transition: transform .8s var(--ease-silk); }
+.motion .arrow-btn:hover { background: rgba(255, 255, 255, .4); border-color: rgba(255, 255, 255, .85); }
+.motion .arrow-btn[aria-label^="Next"]:hover img { transform: translateX(2px); }
+.motion .arrow-btn[aria-label^="Prev"]:hover img { transform: translateX(-2px); }
+.motion .glass-btn { transition: background-color .8s var(--ease-silk), border-color .8s var(--ease-silk); }
+.motion .glass-btn:hover { background: rgba(255, 255, 255, .32); border-color: rgba(255, 255, 255, .7); }
+
+/* Fit Finder bars */
+.motion .fit-bar__arrow, .motion .fit-invite__arrow { transition: transform .9s var(--ease-silk), box-shadow .9s var(--ease-silk); }
+.motion .fit-bar:hover .fit-bar__arrow,
+.motion .fit-invite:hover .fit-invite__arrow { transform: translateX(4px) scale(1.1); box-shadow: 0 6px 16px rgba(26, 5, 13, .25); }
+.motion .fit-bar:hover { background: rgba(255, 255, 255, 0.2); }
+.motion .fit-invite:hover { box-shadow: 0 18px 44px rgba(31, 8, 18, 0.32); }
+
+/* FAQ rows */
+.motion .acc summary { transition: translate .8s var(--ease-silk), color .8s var(--ease-silk); }
+.motion .acc:hover { background: #f0d9d3; }
+.motion .acc:hover summary { color: var(--wine); translate: 6px 0; }
+
+/* Footer + text links: underline draws in */
+.motion .footer__col a,
+.motion .footer__contact a,
+.motion .footer__legal a,
+.motion .insta__handle { position: relative; }
+.motion .footer__col a::after,
+.motion .footer__contact a::after,
+.motion .footer__legal a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .9s var(--ease-silk);
+}
+.motion .footer__col a:hover::after,
+.motion .footer__contact a:hover::after,
+.motion .footer__legal a:hover::after { transform: scaleX(1); transform-origin: left; }
+.motion .footer__contact a:hover, .motion .footer__legal a:hover { text-decoration: none; }
+
+/* WhatsApp */
+.motion .whatsapp { transition: transform .9s var(--ease-silk), box-shadow .9s var(--ease-silk); }
+.motion .whatsapp:hover { transform: translateY(-4px); filter: drop-shadow(0 14px 20px rgba(64, 20, 31, 0.3)); }
+
+/* Once the hero intro has finished, drop its entrance delays so hovers respond immediately */
+.motion .hero.is-ready .hero__actions > .btn,
+.motion .hero.is-ready .hero__controls,
+.motion .hero.is-ready .fit-invite {
+  transition-delay: 0s;
+}
+.motion .hero.is-ready .hero__actions > .btn {
+  transition-property: color, letter-spacing, border-color, box-shadow, background-color;
+  transition-duration: .8s;
+  transition-timing-function: var(--ease-silk);
+}
+.motion .hero.is-ready .fit-invite {
+  transition-property: box-shadow;
+  transition-duration: .9s;
+  transition-timing-function: var(--ease-silk);
 }
