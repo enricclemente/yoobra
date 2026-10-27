@@ -629,7 +629,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .founder { display: flex; align-items: stretch; height: 664px; padding: 40px; }
 .founder__image { position: relative; width: 600px; flex: none; overflow: hidden; }
-.founder__image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 40% 0; }
+.founder__image img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; }
 .founder__copy {
   flex: 1 1 0;
   min-width: 0;

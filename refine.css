@@ -1,0 +1,196 @@
+/* ==========================================================================
+   yoobra · Refinement layer
+   Same sections, copy and layout as the Figma design. This layer only polishes
+   detail: typesetting, surfaces, light, texture, edges and shadows.
+   ========================================================================== */
+
+:root {
+  /* Layered, warm shadows (plum-tinted, never grey) */
+  --shadow-soft: 0 1px 1px rgba(74, 29, 44, .04), 0 4px 10px rgba(74, 29, 44, .05), 0 18px 40px rgba(74, 29, 44, .07);
+  --shadow-float: 0 1px 2px rgba(26, 5, 13, .08), 0 8px 20px rgba(26, 5, 13, .12), 0 30px 60px rgba(26, 5, 13, .18);
+  --hairline-light: rgba(255, 248, 245, 0.14);
+  --hairline-dark: rgba(110, 31, 53, 0.10);
+  /* Film grain, generated (no image request) */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --------------------------------------------------------------------------
+   Typesetting
+   -------------------------------------------------------------------------- */
+body {
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+  font-feature-settings: "kern" 1, "liga" 1;
+  -moz-osx-font-smoothing: grayscale;
+}
+h1, h2, h3, .h-display, .hero__title, .theatre__title, .system__title,
+.manifesto__title, .faq__title, .footer__big, .newsletter__title,
+.founder__quote, .proof__title, .compare-card__title, .look-card__title {
+  text-wrap: balance;
+}
+p, .proof__body, .edu__body, .fit__body, .founder__body, .faq__body, .acc p {
+  text-wrap: pretty;
+  hanging-punctuation: first;
+}
+
+/* Numerals: lining and evenly spaced, like a jeweller's engraving */
+.edu__stat, .step__num, .recog-card__num, .care-card__num, .faq-cat__num,
+.quiz__count, .fit-invite__meta, .nav__bag-count {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* Founder quote: hang the opening mark so the text edge stays clean */
+.founder__quote { text-indent: -0.42em; }
+
+/* Selection in brand colours */
+::selection { background: var(--wine); color: var(--cream); }
+.gradient-wine ::selection, .footer ::selection, .hero ::selection { background: var(--peach); color: var(--plum-900); }
+
+/* Focus: a fine double ring rather than a heavy outline */
+:focus-visible {
+  outline: 1px solid var(--peach);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px rgba(238, 182, 172, .18);
+}
+
+/* Slim scrollbar in brand tones */
+html { scrollbar-width: thin; scrollbar-color: rgba(110, 31, 53, .45) var(--page); }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--page); }
+::-webkit-scrollbar-thumb { background: rgba(110, 31, 53, .35); border: 3px solid var(--page); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(110, 31, 53, .6); }
+
+/* --------------------------------------------------------------------------
+   Surfaces: silk sheen on the wine sections
+   A faint highlight sits over the existing gradient, like light on satin.
+   -------------------------------------------------------------------------- */
+.gradient-wine,
+.compare-card--brand,
+.nav__bar,
+.sticky-cta__inner {
+  background-image:
+    radial-gradient(120% 140% at 0% 0%, rgba(255, 248, 245, .07) 0%, rgba(255, 248, 245, 0) 45%),
+    radial-gradient(90% 120% at 100% 100%, rgba(26, 5, 13, .14) 0%, rgba(26, 5, 13, 0) 55%),
+    var(--wine-gradient);
+}
+.footer {
+  background-image:
+    radial-gradient(80% 60% at 15% 0%, rgba(130, 37, 63, .35) 0%, rgba(130, 37, 63, 0) 60%),
+    linear-gradient(var(--plum-900), var(--plum-900));
+}
+.announcement {
+  background-image: linear-gradient(90deg, rgba(255, 248, 245, 0) 0%, rgba(255, 248, 245, .05) 50%, rgba(255, 248, 245, 0) 100%);
+  background-color: var(--plum-900);
+  border-bottom: 1px solid rgba(255, 248, 245, .06);
+}
+
+/* Coral sections: a soft top-light so the gradient feels lit, not flat */
+.looks, .manifesto {
+  background-image:
+    radial-gradient(70% 50% at 50% 0%, rgba(255, 248, 245, .14) 0%, rgba(255, 248, 245, 0) 70%),
+    linear-gradient(180deg, var(--coral) 50%, var(--peach));
+}
+
+/* --------------------------------------------------------------------------
+   Film grain on photography and colour fields (very low, editorial)
+   -------------------------------------------------------------------------- */
+.hero, .theatre, .media-card, .manifesto__band, .founder__image, .gradient-wine, .looks, .manifesto, .footer {
+  position: relative;
+}
+.hero::after, .theatre::after, .media-card::after, .manifesto__band::after, .founder__image::after,
+.gradient-wine::after, .looks::after, .manifesto::after, .footer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background-image: var(--grain);
+  background-size: 160px 160px;
+  mix-blend-mode: overlay;
+  opacity: .16;
+}
+.gradient-wine::after, .looks::after, .manifesto::after, .footer::after { opacity: .1; z-index: 0; }
+.media-card::after, .manifesto__band::after { z-index: 1; }
+.hero > .hero__statement, .hero > .hero__controls, .hero > .fit-invite, .hero > .scroll-cue,
+.theatre > .theatre__statement { z-index: 4; }
+.gradient-wine > *, .looks > *, .manifesto > *, .footer > * { position: relative; z-index: 1; }
+.founder__image > img { z-index: 0; }
+
+/* Photography: gentle vignette + a hairline edge so images sit crisply */
+.media-card::before, .manifesto__band::before, .founder__image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 45%, rgba(26, 5, 13, 0) 55%, rgba(26, 5, 13, .28) 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 248, 245, .06);
+}
+.care-card > img, .insta-post > img { box-shadow: inset 0 0 0 1px rgba(255, 248, 245, .06); }
+
+/* Hero: deeper, more cinematic grade for headline legibility */
+.hero__overlay {
+  background:
+    linear-gradient(180deg, rgba(26, 8, 15, .18) 0%, rgba(26, 8, 15, 0) 22%),
+    linear-gradient(0deg, rgba(26, 8, 15, .62) 0%, rgba(26, 8, 15, .18) 42%, rgba(26, 8, 15, 0) 62%),
+    linear-gradient(90deg, rgba(26, 8, 15, .32) 0%, rgba(26, 8, 15, 0) 55%);
+}
+.hero__title { text-shadow: 0 2px 30px rgba(26, 5, 13, .25); }
+.theatre__overlay {
+  background:
+    radial-gradient(60% 70% at 50% 50%, rgba(26, 8, 15, .28) 0%, rgba(26, 8, 15, .08) 70%),
+    linear-gradient(0deg, rgba(26, 8, 15, .25), rgba(26, 8, 15, 0) 40%);
+}
+.theatre__title { text-shadow: 0 2px 40px rgba(26, 5, 13, .3); }
+
+/* --------------------------------------------------------------------------
+   Cards & panels: finer edges, layered shadows
+   -------------------------------------------------------------------------- */
+.compare-card--plain { border-color: var(--hairline-dark); box-shadow: var(--shadow-soft); }
+.compare-card--brand { box-shadow: var(--shadow-soft), inset 0 0 0 1px var(--hairline-light); }
+.recog-card, .care-card, .acc { box-shadow: inset 0 0 0 1px rgba(110, 31, 53, .04); }
+.look-card { box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset, var(--shadow-soft); }
+.quiz { box-shadow: var(--shadow-float); }
+.quiz__choice { border-color: rgba(155, 39, 67, .12); }
+.newsletter__card { box-shadow: inset 0 0 0 1px rgba(110, 31, 53, .05); }
+.newsletter__form { box-shadow: 0 1px 2px rgba(74, 29, 44, .04), 0 10px 30px rgba(74, 29, 44, .06); }
+.sticky-cta__inner { box-shadow: var(--shadow-float), inset 0 1px 0 rgba(255, 248, 245, .08); }
+.fit-invite { box-shadow: var(--shadow-float); }
+.step { box-shadow: inset 0 0 0 1px rgba(255, 248, 245, .05); }
+
+/* Buttons: crisp hairline highlight, tactile depth */
+.btn--cream { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .6), 0 1px 2px rgba(26, 5, 13, .08); }
+.btn--wine { box-shadow: inset 0 1px 0 rgba(255, 248, 245, .1), 0 1px 2px rgba(26, 5, 13, .12); }
+.btn--shadow { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .6), 0 4px 16px rgba(26, 5, 13, .18); }
+.nav__cta { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .6); }
+
+/* Hairlines a touch lighter so they read as detail, not structure */
+.proof__divider { background: linear-gradient(180deg, rgba(110, 31, 53, 0), rgba(110, 31, 53, .22), rgba(110, 31, 53, 0)); }
+.faq-cat + .faq-cat { border-top-color: var(--hairline-dark); }
+.footer__statement, .footer__legal { border-color: rgba(255, 248, 245, .12); }
+
+/* Payment marks: quiet until hovered */
+.footer__payments { opacity: .72; transition: opacity .9s cubic-bezier(0.33, 0, 0.13, 1); }
+.footer__payments:hover { opacity: 1; }
+
+/* Inputs: refined field */
+.newsletter__form input::placeholder { color: rgba(26, 26, 26, .55); }
+.newsletter__form input { caret-color: var(--wine); }
+
+/* Mobile sticky bar keeps the sheen without the inner corners */
+@media (max-width: 900px) {
+  .sticky-cta__inner { box-shadow: 0 -10px 30px rgba(64, 15, 31, .22), inset 0 1px 0 rgba(255, 248, 245, .08); }
+}
+
+/* Grain and vignette are decoration only: drop them for print */
+@media print {
+  .hero::after, .theatre::after, .media-card::after, .manifesto__band::after, .founder__image::after,
+  .gradient-wine::after, .looks::after, .manifesto::after, .footer::after,
+  .media-card::before, .manifesto__band::before, .founder__image::before { display: none; }
+}
+
+/* Founder portrait is shot on a light studio backdrop: no vignette, just the hairline */
+.founder__image::before { background: none; box-shadow: inset 0 0 0 1px rgba(255, 248, 245, .08); }
+.founder__image::after { opacity: .08; }
+/* Inline-block word masks inherit text-indent; reset so only the line hangs */
+.split-w { text-indent: 0; }
