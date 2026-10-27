@@ -1,118 +1,122 @@
 /* ==========================================================================
    yoobra · Motion layer
+   Direction: quiet luxury. Long, soft easing; small distances; no bounce,
+   no wobble, no gimmicks. Movement should feel like fabric settling.
+
    Everything here is enabled by the `motion` class on <html>, which is only
    added when the visitor hasn't asked for reduced motion. Without it (or
    without JavaScript) the page renders fully static and fully visible.
    ========================================================================== */
 
 :root {
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);      /* long, soft settle */
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);   /* slow curtain */
+  --ease-silk: cubic-bezier(0.33, 0, 0.13, 1);     /* hovers */
+  --t-reveal: 1.6s;
+  --t-hover: .9s;
 }
 
 /* --------------------------------------------------------------------------
-   Scroll progress bar
+   Scroll progress hairline
    -------------------------------------------------------------------------- */
 .scroll-progress {
   position: fixed;
   inset: 0 0 auto 0;
-  height: 3px;
+  height: 2px;
   z-index: 100;
   pointer-events: none;
   transform-origin: 0 50%;
   transform: scaleX(0);
-  background: linear-gradient(90deg, var(--peach), var(--coral) 50%, var(--wine));
+  background: var(--peach);
+  opacity: .9;
 }
 
 /* --------------------------------------------------------------------------
-   Nav: hides on scroll down, returns on scroll up
+   Nav: recedes on scroll down, returns on scroll up
    -------------------------------------------------------------------------- */
-.motion .nav { transition: transform .5s var(--ease-out); }
+.motion .nav { transition: transform 1s var(--ease-out); }
 .motion .nav.is-hidden { transform: translateY(-110%); }
-.motion .nav__bar { transition: height .4s var(--ease-out), box-shadow .4s ease; }
-.motion .nav.is-scrolled .nav__bar { height: 60px; box-shadow: 0 12px 28px rgba(64, 15, 31, 0.28); }
-.motion .nav__menu a { position: relative; }
+.motion .nav__bar { transition: height .9s var(--ease-out), box-shadow .9s var(--ease-out); }
+.motion .nav.is-scrolled .nav__bar { height: 60px; box-shadow: 0 10px 30px rgba(64, 15, 31, 0.18); }
+.motion .nav__menu a { position: relative; transition: color var(--t-hover) var(--ease-silk); }
 .motion .nav__menu a::after {
   content: "";
   position: absolute;
   left: 0; right: 18px; bottom: 4px;
   height: 1px;
-  background: var(--peach);
+  background: rgba(238, 182, 172, .9);
   transform: scaleX(0);
   transform-origin: right;
-  transition: transform .45s var(--ease-out);
+  transition: transform var(--t-hover) var(--ease-silk);
 }
 .motion .nav__menu a:hover::after { transform: scaleX(1); transform-origin: left; }
-.motion .nav__menu a img { transition: transform .3s var(--ease-out); }
-.motion .nav__menu a:hover img { transform: rotate(180deg); }
 
 /* --------------------------------------------------------------------------
-   Split-text line reveals
+   Headlines: words rise from behind a mask, unhurried
    -------------------------------------------------------------------------- */
-.split-w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.split-w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .1em; margin-bottom: -.1em; }
 .split-i { display: inline-block; will-change: transform; }
 .motion [data-split] .split-i {
-  transform: translateY(110%) rotate(4deg);
-  transform-origin: 0 100%;
-  transition: transform 1.1s var(--ease-out);
-  transition-delay: calc(var(--i, 0) * 45ms + var(--d, 0ms));
+  transform: translateY(105%);
+  opacity: 0;
+  transition: transform 1.6s var(--ease-out), opacity 1.2s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 60ms + var(--d, 0ms));
 }
-.motion [data-split].is-in .split-i { transform: none; }
+.motion [data-split].is-in .split-i { transform: none; opacity: 1; }
 
 /* --------------------------------------------------------------------------
-   Generic reveal
+   Generic reveal: a short, soft rise with a fade
    -------------------------------------------------------------------------- */
 .motion [data-reveal] {
   opacity: 0;
-  translate: 0 36px;
-  transition: opacity 1s var(--ease-out), translate 1.1s var(--ease-out), scale 1.1s var(--ease-out);
-  transition-delay: calc(var(--i, 0) * 90ms + var(--d, 0ms));
+  translate: 0 22px;
+  transition: opacity var(--t-reveal) var(--ease-out), translate var(--t-reveal) var(--ease-out), scale var(--t-reveal) var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 120ms + var(--d, 0ms));
 }
 .motion [data-reveal="fade"] { translate: none; }
-.motion [data-reveal="left"] { translate: -48px 0; }
-.motion [data-reveal="right"] { translate: 48px 0; }
-.motion [data-reveal="scale"] { translate: none; scale: .94; }
+.motion [data-reveal="left"] { translate: -24px 0; }
+.motion [data-reveal="right"] { translate: 24px 0; }
+.motion [data-reveal="scale"] { translate: 0 12px; scale: .98; }
 .motion [data-reveal].is-in { opacity: 1; translate: none; scale: none; }
 
-/* Clip-path image reveals */
+/* Photography unveils like a curtain */
 .motion [data-clip] {
   clip-path: inset(100% 0 0 0);
-  transition: clip-path 1.4s var(--ease-in-out);
+  transition: clip-path 2s var(--ease-in-out);
   transition-delay: var(--d, 0ms);
 }
 .motion [data-clip="left"] { clip-path: inset(0 100% 0 0); }
 .motion [data-clip].is-in { clip-path: inset(0 0 0 0); }
 
-/* Divider grows */
-.motion .proof__divider { transform: scaleY(0); transition: transform 1.2s var(--ease-out) .3s; }
+.motion .proof__divider { transform: scaleY(0); transition: transform 1.8s var(--ease-out) .4s; }
 .motion .proof.is-in .proof__divider { transform: scaleY(1); }
 
 /* --------------------------------------------------------------------------
-   Hero intro + scroll
+   Hero: slow fade up from plum, image settles
    -------------------------------------------------------------------------- */
 .motion .hero__media {
-  transform: scale(1.18);
-  filter: saturate(.6) brightness(.7);
-  transition: transform 2.4s var(--ease-out), filter 2.4s var(--ease-out);
+  transform: scale(1.1);
+  filter: brightness(.6) saturate(.7);
+  transition: transform 3.6s var(--ease-out), filter 3s var(--ease-out);
   will-change: transform;
 }
-.motion .hero.is-in .hero__media { transform: scale(1.04) translate3d(0, var(--py, 0px), 0); filter: none; }
-.motion .hero.is-ready .hero__media { transition: filter 2.4s var(--ease-out); }
+.motion .hero.is-in .hero__media { transform: scale(1.03) translate3d(0, var(--py, 0px), 0); filter: none; }
+.motion .hero.is-ready .hero__media { transition: filter 3s var(--ease-out); }
 .motion .hero__statement { will-change: transform, opacity; }
 
-.motion .hero__controls,
-.motion .fit-invite,
-.motion .hero__actions > * {
+.motion .hero .hero__controls,
+.motion .hero .fit-invite,
+.motion .hero .hero__actions > .btn {
   opacity: 0;
-  translate: 0 24px;
-  transition: opacity .9s var(--ease-out), translate 1s var(--ease-out), transform .5s var(--ease-out);
+  translate: 0 14px;
+  transition: opacity 1.4s var(--ease-out), translate 1.6s var(--ease-out), background-color var(--t-hover) var(--ease-silk), color var(--t-hover) var(--ease-silk), box-shadow var(--t-hover) var(--ease-silk);
 }
-.motion .hero.is-in .hero__actions > * { opacity: 1; translate: none; transition-delay: calc(700ms + var(--i, 0) * 120ms); }
-.motion .hero.is-in .hero__controls { opacity: 1; transform: none; transition-delay: 1.1s; }
-.motion .hero.is-in .fit-invite { opacity: 1; transform: none; transition-delay: 1.3s; }
-.motion .fit-invite__steps i { transition: width .5s var(--ease-out), background-color .5s; }
+.motion .hero.is-in .hero__actions > .btn { opacity: 1; translate: none; transition-delay: calc(1.3s + var(--i, 0) * 150ms); }
+.motion .hero.is-in .hero__controls { opacity: 1; translate: none; transition-delay: 1.9s; }
+.motion .hero.is-in .fit-invite { opacity: 1; translate: none; transition-delay: 2.1s; }
+.motion .fit-invite__steps i { transition: width 1.2s var(--ease-out), background-color 1.2s var(--ease-out); }
 
-/* Grid shimmer: the 9 tiles flash in sequence on load */
+/* Plum veil that lifts off the 9-grid, one tile at a time, softly */
 .hero__tiles {
   position: absolute;
   inset: 0;
@@ -124,209 +128,186 @@
 .hero__tiles i { background: var(--plum-900); opacity: 1; }
 .motion .hero.is-in .hero__tiles i {
   opacity: 0;
-  transition: opacity 1.1s var(--ease-out);
-  transition-delay: calc(var(--i) * 90ms + 100ms);
+  transition: opacity 2.2s var(--ease-out);
+  transition-delay: calc(var(--i) * 110ms + 150ms);
 }
 html:not(.motion) .hero__tiles { display: none; }
 
-/* Scroll cue */
+/* Scroll cue: a slow hairline */
 .scroll-cue {
   position: absolute;
   left: 50%;
   bottom: 22px;
   width: 1px;
-  height: 46px;
-  background: rgba(255, 248, 245, 0.25);
+  height: 52px;
+  background: rgba(255, 248, 245, 0.2);
   overflow: hidden;
   transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 1.6s var(--ease-out) 2.6s;
 }
+.motion .hero.is-in .scroll-cue { opacity: 1; }
 .scroll-cue::after {
   content: "";
   position: absolute;
   inset: 0;
   background: var(--cream);
-  animation: cue 2.2s var(--ease-in-out) infinite;
+  animation: cue 3.2s var(--ease-in-out) infinite;
 }
 @keyframes cue {
   0% { transform: translateY(-100%); }
-  60%, 100% { transform: translateY(100%); }
+  55%, 100% { transform: translateY(100%); }
 }
 html:not(.motion) .scroll-cue { display: none; }
 
 /* --------------------------------------------------------------------------
-   Annotations draw in
+   Annotations: label fades, line draws, dot appears — no bounce
    -------------------------------------------------------------------------- */
-.motion .anno__label { opacity: 0; transform: translateY(-8px); transition: opacity .6s ease, transform .8s var(--ease-out); transition-delay: var(--d, 0ms); }
-.motion .anno__leader { transform: scaleY(0); transform-origin: top; transition: transform 1s var(--ease-in-out); transition-delay: calc(var(--d, 0ms) + 200ms); }
-.motion .anno__dot { opacity: 0; transform: scale(0); transition: opacity .3s, transform .6s cubic-bezier(.34, 1.8, .64, 1); transition-delay: calc(var(--d, 0ms) + 1050ms); }
-.motion .is-in .anno__label { opacity: 1; transform: none; }
+.motion .anno__label { opacity: 0; transition: opacity 1.4s var(--ease-out); transition-delay: var(--d, 0ms); }
+.motion .anno__leader { transform: scaleY(0); transform-origin: top; transition: transform 1.6s var(--ease-in-out); transition-delay: calc(var(--d, 0ms) + 300ms); }
+.motion .anno__dot { opacity: 0; transition: opacity 1.2s var(--ease-out); transition-delay: calc(var(--d, 0ms) + 1500ms); }
+.motion .is-in .anno__label,
+.motion .is-in .anno__dot { opacity: 1; }
 .motion .is-in .anno__leader { transform: none; }
-.motion .is-in .anno__dot { opacity: 1; transform: none; }
-.motion .is-in .anno__dot { animation: dot-pulse 2.6s ease-in-out 2s infinite; }
-@keyframes dot-pulse {
-  0%, 100% { filter: drop-shadow(0 0 0 rgba(255, 248, 245, 0)); }
-  50% { filter: drop-shadow(0 0 6px rgba(255, 248, 245, .95)); }
-}
 
 /* --------------------------------------------------------------------------
-   Parallax media
+   Parallax media (amplitude kept small in JS)
    -------------------------------------------------------------------------- */
-.motion [data-parallax] { will-change: transform; transform: translate3d(0, var(--py, 0px), 0) scale(var(--ps, 1.12)); }
+.motion [data-parallax] { will-change: transform; transform: translate3d(0, var(--py, 0px), 0) scale(var(--ps, 1.08)); }
 
-/* Theatre: image expands from a framed window to full bleed as you scroll */
+/* Theatre: a framed window that slowly opens to full bleed */
 .motion .theatre { clip-path: inset(var(--inset-y, 0px) var(--inset-x, 0px) round var(--inset-r, 0px)); }
-.motion .theatre__media { transform: scale(var(--ts, 1)); will-change: transform; }
+.motion .theatre__media { will-change: transform; }
 
 /* --------------------------------------------------------------------------
-   Hover & micro-interactions
+   Hover: quiet and tactile
    -------------------------------------------------------------------------- */
-.btn { position: relative; overflow: hidden; isolation: isolate; }
-.motion .btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .45) 50%, transparent 70%);
-  transform: translateX(-120%);
-  transition: transform .9s var(--ease-out);
+.motion .btn {
+  transition: background-color var(--t-hover) var(--ease-silk), color var(--t-hover) var(--ease-silk), border-color var(--t-hover) var(--ease-silk), box-shadow var(--t-hover) var(--ease-silk);
 }
-.motion .btn:hover::before { transform: translateX(120%); }
-.motion .btn img { transition: transform .4s var(--ease-out); }
-.motion .btn:hover img { transform: translateX(4px); }
-.motion [data-magnetic] { transition: transform .5s var(--ease-out), background-color .2s, color .2s, box-shadow .2s; }
+.motion .btn:hover { transform: none; }
+.motion .btn--cream:hover { background: #fff; box-shadow: 0 10px 30px rgba(26, 5, 13, 0.14); }
+.motion .btn--wine:hover { background: var(--plum-900); }
+.motion .btn--glass:hover { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, .6); }
+.motion .btn img { transition: transform var(--t-hover) var(--ease-silk); }
+.motion .btn:hover img { transform: translateX(3px); }
 
-/* Media zoom on hover */
-.motion .look-card__media .media-card__img,
+/* Photography breathes on hover */
+.motion .look-card__media .slides,
 .motion .care-card > img,
-.motion .system__media .media-card__img {
-  transition: transform 1.2s var(--ease-out);
+.motion .system__media .media-card__img,
+.motion .insta-post > img {
+  transition: transform 2.2s var(--ease-silk);
 }
-.motion .look-card:hover .media-card__img,
+.motion .look-card:hover .slides { transform: translate3d(0, var(--py, 0px), 0) scale(1.11); }
 .motion .care-card:hover > img,
-.motion .system__media:hover .media-card__img { transform: scale(1.06); }
+.motion .system__media:hover .media-card__img { transform: scale(1.035); }
+.motion .insta-post:hover > img { transform: scale(1.04); }
 .care-card { overflow: hidden; }
 
-/* 3D tilt cards */
-.motion [data-tilt] {
-  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0px));
-  transition: transform .6s var(--ease-out), box-shadow .6s var(--ease-out);
-}
-.motion [data-tilt]:hover { --lift: -6px; box-shadow: 0 24px 48px rgba(74, 29, 44, 0.22); }
-.motion [data-tilt].is-tilting { transition: transform .12s linear, box-shadow .6s var(--ease-out); }
-
-/* Cards lift */
+/* Cards: a whisper of lift */
+.motion .look-card,
+.motion .care-card,
 .motion .recog-card,
 .motion .compare-card,
-.motion .step {
-  transition: transform .6s var(--ease-out), box-shadow .6s var(--ease-out), background-color .4s;
+.motion .quiz {
+  transition: transform 1.2s var(--ease-silk), box-shadow 1.2s var(--ease-silk), background-color 1.2s var(--ease-silk);
 }
+.motion .look-card:hover,
+.motion .care-card:hover,
 .motion .recog-card:hover,
-.motion .compare-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(74, 29, 44, 0.14); }
-.motion .step:hover { background: rgba(255, 248, 245, 0.12); transform: translateX(8px); }
-.motion .recog-card__num { transition: letter-spacing .6s var(--ease-out), color .4s; }
-.motion .recog-card:hover .recog-card__num { letter-spacing: 4px; color: var(--wine); }
+.motion .compare-card:hover { transform: translateY(-3px); box-shadow: 0 22px 50px rgba(74, 29, 44, 0.10); }
+.motion .step { transition: background-color 1s var(--ease-silk); }
+.motion .step:hover { background: rgba(255, 248, 245, 0.1); }
 
-/* Instagram tiles */
+/* Instagram tiles: a soft plum veil */
 .motion .insta-post::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 40%, rgba(74, 29, 44, .55));
+  background: linear-gradient(180deg, transparent 50%, rgba(74, 29, 44, .4));
   opacity: 0;
-  transition: opacity .5s ease;
+  transition: opacity 1.2s var(--ease-silk);
 }
 .motion .insta-post:hover::after { opacity: 1; }
-.motion .insta-post__badge { z-index: 1; transition: transform .5s var(--ease-out); }
-.motion .insta-post:hover .insta-post__badge { transform: rotate(-12deg) scale(1.12); }
+.motion .insta-post__badge { z-index: 1; }
 
 /* Quiz */
-.motion .quiz__bar span { transform: scaleX(0); transform-origin: left; transition: transform 1.4s var(--ease-out) .5s; }
+.motion .quiz__bar span { transform: scaleX(0); transform-origin: left; transition: transform 2s var(--ease-out) .8s; }
 .motion .quiz.is-in .quiz__bar span { transform: none; }
-.motion .quiz__choice { transition: transform .4s var(--ease-out), background-color .2s, border-color .2s; }
-.motion .quiz__choice:hover { transform: translateY(-4px); }
-.motion .quiz__choice img { transition: transform .6s cubic-bezier(.34, 1.6, .64, 1); }
-.motion .quiz__choice:hover img { transform: scale(1.15); }
-.motion .quiz { transition: transform .8s var(--ease-out), box-shadow .8s; }
-.motion .quiz:hover { box-shadow: 0 24px 56px rgba(26, 5, 13, 0.35); }
+.motion .quiz__choice { transition: background-color .8s var(--ease-silk), border-color .8s var(--ease-silk); }
+.motion .quiz:hover { box-shadow: 0 18px 44px rgba(26, 5, 13, 0.3); }
 
 /* Fit bars */
-.motion .fit-bar__arrow, .motion .fit-invite__arrow { transition: transform .5s var(--ease-out); }
-.motion .fit-bar:hover .fit-bar__arrow, .motion .fit-invite:hover .fit-invite__arrow { transform: translateX(4px) rotate(-45deg); }
-.motion .fit-bar__icon img, .motion .fit-invite__icon img { animation: rings 4s var(--ease-in-out) infinite; }
-@keyframes rings {
-  0%, 70%, 100% { transform: none; }
-  80% { transform: translateX(-2px) rotate(-6deg); }
-  90% { transform: translateX(2px) rotate(6deg); }
-}
+.motion .fit-bar__arrow, .motion .fit-invite__arrow { transition: transform var(--t-hover) var(--ease-silk); }
+.motion .fit-bar:hover .fit-bar__arrow, .motion .fit-invite:hover .fit-invite__arrow { transform: translateX(3px); }
+.motion .fit-bar { transition: background-color var(--t-hover) var(--ease-silk); }
+.motion .fit-invite { transition: opacity 1.4s var(--ease-out), translate 1.6s var(--ease-out), box-shadow var(--t-hover) var(--ease-silk); }
+.motion .fit-invite:hover { transform: none; box-shadow: 0 14px 36px rgba(31, 8, 18, 0.26); }
 
-/* Motif rings draw on */
-.motion .motif { clip-path: inset(0 100% 0 0); transition: clip-path 1.2s var(--ease-in-out); }
+/* Ring motif draws on like a pen line */
+.motion .motif { clip-path: inset(0 100% 0 0); transition: clip-path 2s var(--ease-in-out); }
 .motion .is-in .motif, .motion .motif.is-in { clip-path: inset(0 0 0 0); }
 
-/* FAQ accordion smooth open */
-.acc { transition: background-color .3s; }
-.acc:hover { background: #f3dfda; }
-.motion .acc summary::after { transition: transform .4s var(--ease-out); }
+/* FAQ */
+.acc { transition: background-color .8s var(--ease-silk); }
+.acc:hover { background: #f3e1dc; }
+.motion .acc summary::after { transition: transform .9s var(--ease-silk); }
 .motion .acc[open] summary::after { transform: rotate(180deg); }
-.motion .acc .acc__body { overflow: hidden; transition: height .5s var(--ease-out), opacity .4s; }
+.motion .acc .acc__body { overflow: hidden; transition: height .9s var(--ease-out), opacity .9s var(--ease-out); }
 
-/* WhatsApp */
-.motion .whatsapp { animation: wa-in 1s var(--ease-out) 2s both; }
-.motion .whatsapp::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: 50%;
-  border: 2px solid #25d366;
-  animation: wa-ring 2.8s ease-out 3s infinite;
+/* WhatsApp: simply fades in after the hero has settled */
+.motion .whatsapp { animation: wa-in 1.6s var(--ease-out) 3s both; }
+@keyframes wa-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.motion .whatsapp:hover { transform: none; }
+
+/* Footer links */
+.motion .footer__col a { width: fit-content; transition: color var(--t-hover) var(--ease-silk); }
+.motion .footer__col a:hover { color: var(--peach); text-decoration: none; }
+
+/* --------------------------------------------------------------------------
+   Image carousels: slow cross-dissolve with a gentle settle
+   -------------------------------------------------------------------------- */
+.slides { position: absolute; inset: 0; overflow: hidden; }
+.slides .slide {
+  opacity: 0;
+  scale: 1.04;
+  transition: opacity 1.8s var(--ease-in-out), scale 7s var(--ease-out);
 }
-@keyframes wa-in { from { opacity: 0; transform: scale(.4) translateY(30px); } to { opacity: 1; transform: none; } }
-@keyframes wa-ring { from { transform: scale(1); opacity: .8; } to { transform: scale(1.7); opacity: 0; } }
-
-/* Footer: giant line on hover */
-.motion .footer__col a { position: relative; display: inline-block; width: fit-content; transition: transform .4s var(--ease-out), color .3s; }
-.motion .footer__col a:hover { transform: translateX(6px); color: var(--peach); text-decoration: none; }
+.slides .slide.is-active { opacity: 1; scale: 1; z-index: 1; }
+.manifesto__band > .slides { z-index: 0; }
+.manifesto__band > :not(.slides) { z-index: 2; }
+.media-card > :not(.slides) { z-index: 2; }
+[data-slider] .anno { transition: opacity 1.2s var(--ease-out); }
+[data-slider]:not([data-slide="0"]) .anno { opacity: 0 !important; }
+.pager button {
+  position: relative;
+  overflow: hidden;
+  width: 6px; height: 6px; padding: 0;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: width 1.2s var(--ease-silk), background-color 1.2s var(--ease-silk);
+}
+.pager button.is-active { width: 20px; border-radius: 999px; background: rgba(255, 255, 255, .45); }
+.pager--square button, .pager--square button.is-active { border-radius: 0; }
+/* The active dot fills like a slow timer */
+.pager button.is-active::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: #fff;
+  transform-origin: left;
+  animation: slide-timer var(--dur, 6s) linear forwards;
+}
+[data-slider].is-paused .pager button.is-active::after { animation-play-state: paused; }
+@keyframes slide-timer { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.motion .arrow-btn { transition: background-color var(--t-hover) var(--ease-silk), border-color var(--t-hover) var(--ease-silk); }
+.motion .arrow-btn:hover { background: rgba(255, 255, 255, .26); border-color: rgba(255, 255, 255, .55); }
 
 /* --------------------------------------------------------------------------
    Reduced motion: hard stop
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .scroll-progress, .scroll-cue { display: none; }
+  .slides .slide { transition: none; scale: none; }
 }
-
-/* --------------------------------------------------------------------------
-   Image carousels
-   -------------------------------------------------------------------------- */
-.slides { position: absolute; inset: 0; overflow: hidden; }
-.slides .slide {
-  opacity: 0;
-  scale: 1.08;
-  transition: opacity 1s var(--ease-out), scale 2.4s var(--ease-out);
-}
-.slides .slide.is-active { opacity: 1; scale: 1; z-index: 1; }
-.manifesto__band > .slides { z-index: 0; }
-.manifesto__band > :not(.slides) { z-index: 2; }
-.media-card > :not(.slides) { z-index: 2; }
-[data-slider] .anno { transition: opacity .5s ease; }
-[data-slider]:not([data-slide="0"]) .anno { opacity: 0; }
-.pager button {
-  width: 6px; height: 6px; padding: 0;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.55);
-  transition: width .5s var(--ease-out), background-color .3s;
-}
-.pager button.is-active { width: 20px; border-radius: 999px; background: #fff; }
-.pager--square button, .pager--square button.is-active { border-radius: 0; }
-.pager { cursor: default; }
-.pager button { cursor: pointer; }
-/* Slide progress line on the active dot */
-.pager button { position: relative; overflow: hidden; }
-.pager button.is-active::after {
-  content: "";
-  position: absolute; inset: 0;
-  background: var(--peach);
-  transform-origin: left;
-  animation: slide-timer var(--dur, 5s) linear forwards;
-}
-[data-slider].is-paused .pager button.is-active::after { animation-play-state: paused; }
-@keyframes slide-timer { from { transform: scaleX(0); } to { transform: scaleX(1); } }

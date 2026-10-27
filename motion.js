@@ -6,8 +6,7 @@
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
   const isDesktop = () => window.matchMedia('(min-width: 901px)').matches;
-  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
+  
   /* ------------------------------------------------------------------
      1. Split headings into words for line-by-line reveals
      ------------------------------------------------------------------ */
@@ -126,12 +125,12 @@
     cue.setAttribute('aria-hidden', 'true');
     hero.appendChild(cue);
     $$('.hero__actions > *', hero).forEach((b, i) => b.style.setProperty('--i', i));
-    $$('.hero__title .split-i').forEach((w) => w.style.setProperty('--d', '250ms'));
+    $$('.hero__title .split-i').forEach((w) => w.style.setProperty('--d', '700ms'));
 
     const go = () => requestAnimationFrame(() => {
       hero.classList.add('is-in');
       $('.hero__title').classList.add('is-in');
-      setTimeout(() => hero.classList.add('is-ready'), 2500);
+      setTimeout(() => hero.classList.add('is-ready'), 3800);
       // Animate the fit-invite step dots
       const steps = $$('.fit-invite__steps i');
       let s = 0;
@@ -139,7 +138,7 @@
         steps.forEach((st, i) => st.classList.toggle('is-active', i === s));
         steps.forEach((st, i) => { st.style.width = i === s ? '12px' : ''; });
         s = (s + 1) % steps.length;
-      }, 900);
+      }, 1600);
     });
     const img = $('.hero__media', hero);
     if (img.complete) go(); else { img.addEventListener('load', go); setTimeout(go, 1200); }
@@ -156,7 +155,7 @@
     const sio = new IntersectionObserver(([e]) => {
       if (!e.isIntersecting) return;
       sio.disconnect();
-      const t0 = performance.now(), dur = 1800;
+      const t0 = performance.now(), dur = 2600;
       const tick = (t) => {
         const p = Math.min(1, (t - t0) / dur);
         const eased = 1 - Math.pow(1 - p, 4);
@@ -202,10 +201,10 @@
 
     // Hero parallax + fade
     if (heroMedia && y < vh * 1.4) {
-      heroMedia.style.setProperty('--py', (y * 0.35).toFixed(1) + 'px');
-      if (hero.classList.contains('is-ready')) heroMedia.style.transform = `scale(1.04) translate3d(0, ${(y * 0.35).toFixed(1)}px, 0)`;
+      heroMedia.style.setProperty('--py', (y * 0.22).toFixed(1) + 'px');
+      if (hero.classList.contains('is-ready')) heroMedia.style.transform = `scale(1.03) translate3d(0, ${(y * 0.22).toFixed(1)}px, 0)`;
       const p = Math.min(1, y / (vh * 0.8));
-      heroStatement.style.transform = `translate3d(0, ${(y * -0.18).toFixed(1)}px, 0)`;
+      heroStatement.style.transform = `translate3d(0, ${(y * -0.1).toFixed(1)}px, 0)`;
       heroStatement.style.opacity = (1 - p * 1.1).toFixed(3);
     }
 
@@ -214,7 +213,7 @@
       const r = el.parentElement.getBoundingClientRect();
       if (r.bottom < -100 || r.top > vh + 100) return;
       const center = (r.top + r.height / 2 - vh / 2) / vh; // -1..1
-      el.style.setProperty('--py', (center * -40).toFixed(1) + 'px');
+      el.style.setProperty('--py', (center * -24).toFixed(1) + 'px');
     });
 
     // Theatre: framed window opens to full bleed
@@ -223,12 +222,11 @@
       if (r.top < vh && r.bottom > 0) {
         const p = Math.max(0, Math.min(1, (vh - r.top) / (vh * 0.7)));
         const e = 1 - Math.pow(1 - p, 3);
-        const ix = isDesktop() ? 120 : 16;
+        const ix = isDesktop() ? 96 : 14;
         theatre.style.setProperty('--inset-x', ((1 - e) * ix).toFixed(1) + 'px');
         theatre.style.setProperty('--inset-y', ((1 - e) * (isDesktop() ? 60 : 14)).toFixed(1) + 'px');
-        theatre.style.setProperty('--inset-r', ((1 - e) * 24).toFixed(1) + 'px');
-        theatreMedia.style.setProperty('--ts', (1.25 - e * 0.25).toFixed(4));
-        theatreMedia.style.transform = `scale(${(1.25 - e * 0.25).toFixed(4)}) translate3d(0, ${((r.top / vh) * 40).toFixed(1)}px, 0)`;
+        theatre.style.setProperty('--inset-r', ((1 - e) * 4).toFixed(1) + 'px');
+                theatreMedia.style.transform = `scale(${(1.12 - e * 0.12).toFixed(4)}) translate3d(0, ${((r.top / vh) * 24).toFixed(1)}px, 0)`;
       }
     }
 
@@ -236,40 +234,6 @@
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
-
-  /* ------------------------------------------------------------------
-     8. Pointer effects: magnetic buttons + 3D tilt cards (desktop only)
-     ------------------------------------------------------------------ */
-  if (finePointer) {
-    $$('.btn, .glass-btn, .fit-invite__arrow, .fit-bar__arrow').forEach((el) => {
-      el.setAttribute('data-magnetic', '');
-      el.addEventListener('mousemove', (e) => {
-        const r = el.getBoundingClientRect();
-        const x = (e.clientX - r.left - r.width / 2) / r.width;
-        const y = (e.clientY - r.top - r.height / 2) / r.height;
-        el.style.transform = `translate(${(x * 10).toFixed(1)}px, ${(y * 8).toFixed(1)}px)`;
-      });
-      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
-    });
-
-    $$('.look-card, .care-card, .quiz').forEach((el) => {
-      el.setAttribute('data-tilt', '');
-      el.addEventListener('mousemove', (e) => {
-        if (!el.classList.contains('is-in') && el.hasAttribute('data-reveal')) return;
-        const r = el.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        el.classList.add('is-tilting');
-        el.style.setProperty('--ry', (x * 8).toFixed(2) + 'deg');
-        el.style.setProperty('--rx', (y * -8).toFixed(2) + 'deg');
-      });
-      el.addEventListener('mouseleave', () => {
-        el.classList.remove('is-tilting');
-        el.style.setProperty('--ry', '0deg');
-        el.style.setProperty('--rx', '0deg');
-      });
-    });
-  }
 
   /* ------------------------------------------------------------------
      9. Smooth FAQ open/close

@@ -81,7 +81,7 @@
   document.querySelectorAll('[data-slider]').forEach((root, n) => {
     const slides = Array.from(root.querySelectorAll('.slide'));
     if (slides.length < 2) return;
-    const DUR = 5000 + (n % 3) * 600; // offset so cards don't change in lockstep
+    const DUR = 6500 + (n % 3) * 700; // offset so cards don't change in lockstep
     root.style.setProperty('--dur', DUR + 'ms');
     let idx = 0, timer = null, inView = false, hover = false;
 
