@@ -182,7 +182,8 @@
   const heroStatement = $('.hero__statement');
   const theatre = $('.theatre');
   const theatreMedia = $('.theatre__media');
-  const parallax = $$('.edu__media .slides, .manifesto__band > .slides, .look-card__media .slides, .founder__image img, .system__media .media-card__img');
+  const parallax = $$('.edu__media .slides, .manifesto__band > .slides, .look-card__media .slides, .system__media .media-card__img');
+  const founderImg = $('.founder__image img');
   parallax.forEach((el) => el.setAttribute('data-parallax', ''));
 
   let lastY = window.scrollY;
@@ -218,6 +219,16 @@
       const center = (r.top + r.height / 2 - vh / 2) / vh; // -1..1
       el.style.setProperty('--py', (center * -24).toFixed(1) + 'px');
     });
+
+    // Founder portrait: anchored at the top (never crops her head), eases
+    // from a slight zoom down to its natural size as you scroll through
+    if (founderImg) {
+      const r = founderImg.parentElement.getBoundingClientRect();
+      if (r.bottom > 0 && r.top < vh) {
+        const p = Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height)));
+        founderImg.style.transform = `scale(${(1.06 - p * 0.06).toFixed(4)})`;
+      }
+    }
 
     // Theatre: framed window opens to full bleed
     if (theatre) {
