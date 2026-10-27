@@ -8,7 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+  <script>if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');</script>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="motion.css">
 </head>
 <body>
 
@@ -113,8 +115,11 @@
       </div>
 
       <div class="edu">
-        <div class="media-card edu__media">
-          <img class="media-card__img" src="assets/edu-gallery.jpg" alt="A bra held up showing two cups of different fullness">
+        <div class="media-card edu__media" data-slider>
+          <div class="slides"><img class="media-card__img slide is-active" src="assets/edu-gallery.jpg" alt="A bra held up showing two cups of different fullness">
+            <img class="media-card__img slide" src="assets/system-diagram.jpg" alt="yoobra bra with yooboost inserts beside it" loading="lazy">
+            <img class="media-card__img slide" src="assets/inserts-bag.jpg" alt="yooboost inserts with their satin storage bag" loading="lazy">
+          </div>
           <div class="anno" style="--x:30.15%; --top:36px; --h:182px; --x-m:30.15%; --top-m:24px; --h-m:123px">
             <span class="anno__label">Fuller side</span><span class="anno__leader"></span><img class="anno__dot" src="assets/dot.svg" alt="" width="20" height="20">
           </div>
@@ -145,8 +150,11 @@
 
       <div class="looks__grid swipe" data-carousel>
         <article class="look-card">
-          <div class="media-card look-card__media">
-            <img class="media-card__img" src="assets/look-1.jpg" alt="Layered yooboost inserts">
+          <div class="media-card look-card__media" data-slider>
+            <div class="slides"><img class="media-card__img slide is-active" src="assets/look-1.jpg" alt="Layered yooboost inserts">
+            <img class="media-card__img slide" src="assets/inserts-bag.jpg" alt="A pair of yooboost inserts" loading="lazy">
+            <img class="media-card__img slide" src="assets/lace-2.jpg" alt="Recycled lace detail" loading="lazy">
+          </div>
             <div class="anno anno--sm" style="--x:50.2%; --top:28px; --h:139px; --x-m:56.2%; --top-m:16px; --h-m:83px">
               <span class="anno__label">Layered inserts</span><span class="anno__leader"></span><img class="anno__dot" src="assets/dot.svg" alt="" width="20" height="20">
             </div>
@@ -163,8 +171,11 @@
         </article>
 
         <article class="look-card">
-          <div class="media-card look-card__media">
-            <img class="media-card__img" src="assets/look-2.jpg" alt="Gold adjuster on a yoobra strap">
+          <div class="media-card look-card__media" data-slider>
+            <div class="slides"><img class="media-card__img slide is-active" src="assets/look-2.jpg" alt="Gold adjuster on a yoobra strap">
+            <img class="media-card__img slide" src="assets/adjuster.jpg" alt="Engraved yoobra strap adjuster" loading="lazy">
+            <img class="media-card__img slide" src="assets/strap.jpg" alt="Strap and lace detail" loading="lazy">
+          </div>
             <div class="anno anno--sm" style="--x:60%; --top:28px; --h:252px; --x-m:67.6%; --top-m:16px; --h-m:153px">
               <span class="anno__label">Gold adjuster</span><span class="anno__leader"></span><img class="anno__dot" src="assets/dot.svg" alt="" width="20" height="20">
             </div>
@@ -181,8 +192,11 @@
         </article>
 
         <article class="look-card">
-          <div class="media-card look-card__media">
-            <img class="media-card__img" src="assets/look-3.jpg" alt="The signature yoobra clasp">
+          <div class="media-card look-card__media" data-slider>
+            <div class="slides"><img class="media-card__img slide is-active" src="assets/look-3.jpg" alt="The signature yoobra clasp">
+            <img class="media-card__img slide" src="assets/clasp-warm.jpg" alt="Signature clasp close-up" loading="lazy">
+            <img class="media-card__img slide" src="assets/clasp-macro.jpg" alt="Engraved clasp detail" loading="lazy">
+          </div>
             <div class="anno anno--sm" style="--x:42.2%; --top:28px; --h:101px; --x-m:47.3%; --top-m:16px; --h-m:60px">
               <span class="anno__label">Signature clasp</span><span class="anno__leader"></span><img class="anno__dot" src="assets/dot.svg" alt="" width="20" height="20">
             </div>
@@ -384,8 +398,11 @@
         <p class="manifesto__body">One changes. The other takes its time. Pregnancy. Periods. Weight. Age. Life. Things move.</p>
       </div>
 
-      <div class="manifesto__band">
-        <img class="media-card__img" src="assets/inserts-bag.jpg" alt="yooboost inserts with the satin storage bag">
+      <div class="manifesto__band" data-slider>
+        <div class="slides"><img class="media-card__img slide is-active" src="assets/inserts-bag.jpg" alt="yooboost inserts with the satin storage bag">
+            <img class="media-card__img slide" src="assets/clasp-bra.jpg" alt="Signature clasp on the yoobra bra" loading="lazy">
+            <img class="media-card__img slide" src="assets/clasp.jpg" alt="Gold clasp detail" loading="lazy">
+          </div>
         <div class="anno anno--plain d-only" style="--x:120.5px; --top:56px; --h:120px">
           <span class="anno__label">Satin storage bag</span><span class="anno__leader"></span><img class="anno__dot" src="assets/ellipse.svg" alt="" width="8" height="8">
         </div>
@@ -657,5 +674,6 @@
   </a>
 
   <script src="main.js" defer></script>
+  <script src="motion.js" defer></script>
 </body>
 </html>

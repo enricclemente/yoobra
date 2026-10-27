@@ -1,0 +1,364 @@
+/* ==========================================================================
+   yoobra · Motion layer
+   Everything here is enabled by the `motion` class on <html>, which is only
+   added when the visitor hasn't asked for reduced motion. Without it (or
+   without JavaScript) the page renders fully static and fully visible.
+   ========================================================================== */
+
+:root {
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* --------------------------------------------------------------------------
+   Scroll progress bar
+   -------------------------------------------------------------------------- */
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 3px;
+  z-index: 100;
+  pointer-events: none;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  background: linear-gradient(90deg, var(--peach), var(--coral) 50%, var(--wine));
+}
+
+/* --------------------------------------------------------------------------
+   Nav: hides on scroll down, returns on scroll up
+   -------------------------------------------------------------------------- */
+.motion .nav { transition: transform .5s var(--ease-out); }
+.motion .nav.is-hidden { transform: translateY(-110%); }
+.motion .nav__bar { transition: height .4s var(--ease-out), box-shadow .4s ease; }
+.motion .nav.is-scrolled .nav__bar { height: 60px; box-shadow: 0 12px 28px rgba(64, 15, 31, 0.28); }
+.motion .nav__menu a { position: relative; }
+.motion .nav__menu a::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 18px; bottom: 4px;
+  height: 1px;
+  background: var(--peach);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform .45s var(--ease-out);
+}
+.motion .nav__menu a:hover::after { transform: scaleX(1); transform-origin: left; }
+.motion .nav__menu a img { transition: transform .3s var(--ease-out); }
+.motion .nav__menu a:hover img { transform: rotate(180deg); }
+
+/* --------------------------------------------------------------------------
+   Split-text line reveals
+   -------------------------------------------------------------------------- */
+.split-w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.split-i { display: inline-block; will-change: transform; }
+.motion [data-split] .split-i {
+  transform: translateY(110%) rotate(4deg);
+  transform-origin: 0 100%;
+  transition: transform 1.1s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 45ms + var(--d, 0ms));
+}
+.motion [data-split].is-in .split-i { transform: none; }
+
+/* --------------------------------------------------------------------------
+   Generic reveal
+   -------------------------------------------------------------------------- */
+.motion [data-reveal] {
+  opacity: 0;
+  translate: 0 36px;
+  transition: opacity 1s var(--ease-out), translate 1.1s var(--ease-out), scale 1.1s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 90ms + var(--d, 0ms));
+}
+.motion [data-reveal="fade"] { translate: none; }
+.motion [data-reveal="left"] { translate: -48px 0; }
+.motion [data-reveal="right"] { translate: 48px 0; }
+.motion [data-reveal="scale"] { translate: none; scale: .94; }
+.motion [data-reveal].is-in { opacity: 1; translate: none; scale: none; }
+
+/* Clip-path image reveals */
+.motion [data-clip] {
+  clip-path: inset(100% 0 0 0);
+  transition: clip-path 1.4s var(--ease-in-out);
+  transition-delay: var(--d, 0ms);
+}
+.motion [data-clip="left"] { clip-path: inset(0 100% 0 0); }
+.motion [data-clip].is-in { clip-path: inset(0 0 0 0); }
+
+/* Divider grows */
+.motion .proof__divider { transform: scaleY(0); transition: transform 1.2s var(--ease-out) .3s; }
+.motion .proof.is-in .proof__divider { transform: scaleY(1); }
+
+/* --------------------------------------------------------------------------
+   Hero intro + scroll
+   -------------------------------------------------------------------------- */
+.motion .hero__media {
+  transform: scale(1.18);
+  filter: saturate(.6) brightness(.7);
+  transition: transform 2.4s var(--ease-out), filter 2.4s var(--ease-out);
+  will-change: transform;
+}
+.motion .hero.is-in .hero__media { transform: scale(1.04) translate3d(0, var(--py, 0px), 0); filter: none; }
+.motion .hero.is-ready .hero__media { transition: filter 2.4s var(--ease-out); }
+.motion .hero__statement { will-change: transform, opacity; }
+
+.motion .hero__controls,
+.motion .fit-invite,
+.motion .hero__actions > * {
+  opacity: 0;
+  translate: 0 24px;
+  transition: opacity .9s var(--ease-out), translate 1s var(--ease-out), transform .5s var(--ease-out);
+}
+.motion .hero.is-in .hero__actions > * { opacity: 1; translate: none; transition-delay: calc(700ms + var(--i, 0) * 120ms); }
+.motion .hero.is-in .hero__controls { opacity: 1; transform: none; transition-delay: 1.1s; }
+.motion .hero.is-in .fit-invite { opacity: 1; transform: none; transition-delay: 1.3s; }
+.motion .fit-invite__steps i { transition: width .5s var(--ease-out), background-color .5s; }
+
+/* Grid shimmer: the 9 tiles flash in sequence on load */
+.hero__tiles {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  pointer-events: none;
+}
+.hero__tiles i { background: var(--plum-900); opacity: 1; }
+.motion .hero.is-in .hero__tiles i {
+  opacity: 0;
+  transition: opacity 1.1s var(--ease-out);
+  transition-delay: calc(var(--i) * 90ms + 100ms);
+}
+html:not(.motion) .hero__tiles { display: none; }
+
+/* Scroll cue */
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  width: 1px;
+  height: 46px;
+  background: rgba(255, 248, 245, 0.25);
+  overflow: hidden;
+  transform: translateX(-50%);
+}
+.scroll-cue::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--cream);
+  animation: cue 2.2s var(--ease-in-out) infinite;
+}
+@keyframes cue {
+  0% { transform: translateY(-100%); }
+  60%, 100% { transform: translateY(100%); }
+}
+html:not(.motion) .scroll-cue { display: none; }
+
+/* --------------------------------------------------------------------------
+   Marquee band
+   -------------------------------------------------------------------------- */
+.marquee {
+  position: relative;
+  overflow: hidden;
+  background: var(--plum-900);
+  color: var(--cream);
+  padding: 22px 0;
+  border-block: 1px solid rgba(255, 248, 245, 0.08);
+}
+.marquee__track { display: flex; width: max-content; will-change: transform; }
+.marquee__group { display: flex; align-items: center; flex: none; }
+.marquee__item {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding-right: 40px;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: -0.5px;
+  white-space: nowrap;
+}
+.marquee__item:nth-child(even) { color: var(--peach); font-style: normal; }
+.marquee__item img { width: 42px; height: 24px; opacity: .8; }
+@media (max-width: 900px) {
+  .marquee { padding: 16px 0; }
+  .marquee__item { font-size: 22px; gap: 24px; padding-right: 24px; }
+  .marquee__item img { width: 32px; height: 18px; }
+}
+
+/* --------------------------------------------------------------------------
+   Annotations draw in
+   -------------------------------------------------------------------------- */
+.motion .anno__label { opacity: 0; transform: translateY(-8px); transition: opacity .6s ease, transform .8s var(--ease-out); transition-delay: var(--d, 0ms); }
+.motion .anno__leader { transform: scaleY(0); transform-origin: top; transition: transform 1s var(--ease-in-out); transition-delay: calc(var(--d, 0ms) + 200ms); }
+.motion .anno__dot { opacity: 0; transform: scale(0); transition: opacity .3s, transform .6s cubic-bezier(.34, 1.8, .64, 1); transition-delay: calc(var(--d, 0ms) + 1050ms); }
+.motion .is-in .anno__label { opacity: 1; transform: none; }
+.motion .is-in .anno__leader { transform: none; }
+.motion .is-in .anno__dot { opacity: 1; transform: none; }
+.motion .is-in .anno__dot { animation: dot-pulse 2.6s ease-in-out 2s infinite; }
+@keyframes dot-pulse {
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(255, 248, 245, 0)); }
+  50% { filter: drop-shadow(0 0 6px rgba(255, 248, 245, .95)); }
+}
+
+/* --------------------------------------------------------------------------
+   Parallax media
+   -------------------------------------------------------------------------- */
+.motion [data-parallax] { will-change: transform; transform: translate3d(0, var(--py, 0px), 0) scale(var(--ps, 1.12)); }
+
+/* Theatre: image expands from a framed window to full bleed as you scroll */
+.motion .theatre { clip-path: inset(var(--inset-y, 0px) var(--inset-x, 0px) round var(--inset-r, 0px)); }
+.motion .theatre__media { transform: scale(var(--ts, 1)); will-change: transform; }
+
+/* --------------------------------------------------------------------------
+   Hover & micro-interactions
+   -------------------------------------------------------------------------- */
+.btn { position: relative; overflow: hidden; isolation: isolate; }
+.motion .btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform .9s var(--ease-out);
+}
+.motion .btn:hover::before { transform: translateX(120%); }
+.motion .btn img { transition: transform .4s var(--ease-out); }
+.motion .btn:hover img { transform: translateX(4px); }
+.motion [data-magnetic] { transition: transform .5s var(--ease-out), background-color .2s, color .2s, box-shadow .2s; }
+
+/* Media zoom on hover */
+.motion .look-card__media .media-card__img,
+.motion .care-card > img,
+.motion .system__media .media-card__img {
+  transition: transform 1.2s var(--ease-out);
+}
+.motion .look-card:hover .media-card__img,
+.motion .care-card:hover > img,
+.motion .system__media:hover .media-card__img { transform: scale(1.06); }
+.care-card { overflow: hidden; }
+
+/* 3D tilt cards */
+.motion [data-tilt] {
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--lift, 0px));
+  transition: transform .6s var(--ease-out), box-shadow .6s var(--ease-out);
+}
+.motion [data-tilt]:hover { --lift: -6px; box-shadow: 0 24px 48px rgba(74, 29, 44, 0.22); }
+.motion [data-tilt].is-tilting { transition: transform .12s linear, box-shadow .6s var(--ease-out); }
+
+/* Cards lift */
+.motion .recog-card,
+.motion .compare-card,
+.motion .step {
+  transition: transform .6s var(--ease-out), box-shadow .6s var(--ease-out), background-color .4s;
+}
+.motion .recog-card:hover,
+.motion .compare-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(74, 29, 44, 0.14); }
+.motion .step:hover { background: rgba(255, 248, 245, 0.12); transform: translateX(8px); }
+.motion .recog-card__num { transition: letter-spacing .6s var(--ease-out), color .4s; }
+.motion .recog-card:hover .recog-card__num { letter-spacing: 4px; color: var(--wine); }
+
+/* Instagram tiles */
+.motion .insta-post::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(74, 29, 44, .55));
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+.motion .insta-post:hover::after { opacity: 1; }
+.motion .insta-post__badge { z-index: 1; transition: transform .5s var(--ease-out); }
+.motion .insta-post:hover .insta-post__badge { transform: rotate(-12deg) scale(1.12); }
+
+/* Quiz */
+.motion .quiz__bar span { transform: scaleX(0); transform-origin: left; transition: transform 1.4s var(--ease-out) .5s; }
+.motion .quiz.is-in .quiz__bar span { transform: none; }
+.motion .quiz__choice { transition: transform .4s var(--ease-out), background-color .2s, border-color .2s; }
+.motion .quiz__choice:hover { transform: translateY(-4px); }
+.motion .quiz__choice img { transition: transform .6s cubic-bezier(.34, 1.6, .64, 1); }
+.motion .quiz__choice:hover img { transform: scale(1.15); }
+.motion .quiz { transition: transform .8s var(--ease-out), box-shadow .8s; }
+.motion .quiz:hover { box-shadow: 0 24px 56px rgba(26, 5, 13, 0.35); }
+
+/* Fit bars */
+.motion .fit-bar__arrow, .motion .fit-invite__arrow { transition: transform .5s var(--ease-out); }
+.motion .fit-bar:hover .fit-bar__arrow, .motion .fit-invite:hover .fit-invite__arrow { transform: translateX(4px) rotate(-45deg); }
+.motion .fit-bar__icon img, .motion .fit-invite__icon img { animation: rings 4s var(--ease-in-out) infinite; }
+@keyframes rings {
+  0%, 70%, 100% { transform: none; }
+  80% { transform: translateX(-2px) rotate(-6deg); }
+  90% { transform: translateX(2px) rotate(6deg); }
+}
+
+/* Motif rings draw on */
+.motion .motif { clip-path: inset(0 100% 0 0); transition: clip-path 1.2s var(--ease-in-out); }
+.motion .is-in .motif, .motion .motif.is-in { clip-path: inset(0 0 0 0); }
+
+/* FAQ accordion smooth open */
+.acc { transition: background-color .3s; }
+.acc:hover { background: #f3dfda; }
+.motion .acc summary::after { transition: transform .4s var(--ease-out); }
+.motion .acc[open] summary::after { transform: rotate(180deg); }
+.motion .acc .acc__body { overflow: hidden; transition: height .5s var(--ease-out), opacity .4s; }
+
+/* WhatsApp */
+.motion .whatsapp { animation: wa-in 1s var(--ease-out) 2s both; }
+.motion .whatsapp::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 2px solid #25d366;
+  animation: wa-ring 2.8s ease-out 3s infinite;
+}
+@keyframes wa-in { from { opacity: 0; transform: scale(.4) translateY(30px); } to { opacity: 1; transform: none; } }
+@keyframes wa-ring { from { transform: scale(1); opacity: .8; } to { transform: scale(1.7); opacity: 0; } }
+
+/* Footer: giant line on hover */
+.motion .footer__col a { position: relative; display: inline-block; width: fit-content; transition: transform .4s var(--ease-out), color .3s; }
+.motion .footer__col a:hover { transform: translateX(6px); color: var(--peach); text-decoration: none; }
+
+/* --------------------------------------------------------------------------
+   Reduced motion: hard stop
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track { transform: none !important; }
+  .scroll-progress, .scroll-cue { display: none; }
+}
+
+/* --------------------------------------------------------------------------
+   Image carousels
+   -------------------------------------------------------------------------- */
+.slides { position: absolute; inset: 0; overflow: hidden; }
+.slides .slide {
+  opacity: 0;
+  scale: 1.08;
+  transition: opacity 1s var(--ease-out), scale 2.4s var(--ease-out);
+}
+.slides .slide.is-active { opacity: 1; scale: 1; z-index: 1; }
+.manifesto__band > .slides { z-index: 0; }
+.manifesto__band > :not(.slides) { z-index: 2; }
+.media-card > :not(.slides) { z-index: 2; }
+[data-slider] .anno { transition: opacity .5s ease; }
+[data-slider]:not([data-slide="0"]) .anno { opacity: 0; }
+.pager button {
+  width: 6px; height: 6px; padding: 0;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.55);
+  transition: width .5s var(--ease-out), background-color .3s;
+}
+.pager button.is-active { width: 20px; border-radius: 999px; background: #fff; }
+.pager--square button, .pager--square button.is-active { border-radius: 0; }
+.pager { cursor: default; }
+.pager button { cursor: pointer; }
+/* Slide progress line on the active dot */
+.pager button { position: relative; overflow: hidden; }
+.pager button.is-active::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: var(--peach);
+  transform-origin: left;
+  animation: slide-timer var(--dur, 5s) linear forwards;
+}
+[data-slider].is-paused .pager button.is-active::after { animation-play-state: paused; }
+@keyframes slide-timer { from { transform: scaleX(0); } to { transform: scaleX(1); } }
