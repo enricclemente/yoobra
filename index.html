@@ -17,6 +17,7 @@
   </script>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="refine.css">
+  <link rel="stylesheet" href="nav.css">
   <link rel="stylesheet" href="motion.css">
 </head>
 <body>
@@ -25,15 +26,16 @@
   <div class="announcement">A bespoke bra system that shapes to your body.</div>
 
   <!-- Navigation -->
-  <header class="nav">
+  <header class="nav" id="site-nav">
     <div class="nav__bar">
       <div class="nav__left">
         <button class="icon-btn nav__menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-          <img src="assets/icon-menu.svg" alt="" width="22" height="22">
+          <img class="nav__menu-icon" src="assets/icon-menu.svg" alt="" width="22" height="22">
+          <img class="nav__close-icon" src="assets/icon-close-menu.svg" alt="" width="22" height="22">
         </button>
-        <a class="icon-btn nav__search-m" href="/search" aria-label="Search">
+        <button class="icon-btn nav__search-m" type="button" aria-label="Search" aria-expanded="false" aria-controls="mega-search" data-search-open>
           <img src="assets/icon-search-m.svg" alt="" width="22" height="22">
-        </a>
+        </button>
       </div>
 
       <a class="nav__brand" href="/" aria-label="yoobra home">
@@ -41,14 +43,23 @@
       </a>
 
       <nav class="nav__menu" aria-label="Main">
-        <a href="/collections/all">Shop <img src="assets/icon-chevron-down.svg" alt="" width="12" height="12"></a>
-        <a href="/pages/how-it-works">How it works <img src="assets/icon-chevron-down.svg" alt="" width="12" height="12"></a>
-        <a href="/pages/fit-finder">Fit &amp; sizing <img src="assets/icon-chevron-down.svg" alt="" width="12" height="12"></a>
-        <a href="/pages/about-us">Our story <img src="assets/icon-chevron-down.svg" alt="" width="12" height="12"></a>
+        <button type="button" class="nav__trigger" aria-expanded="false" aria-controls="mega-shop" data-panel="mega-shop">Shop <img src="assets/icon-chevron-down.svg" alt="" width="12" height="12"></button>
+        <button type="button" class="nav__trigger" aria-expanded="false" aria-controls="mega-how" data-panel="mega-how">How it works <img src="assets/icon-chevron-down.svg" alt="" width="12" height="12"></button>
+        <button type="button" class="nav__trigger" aria-expanded="false" aria-controls="mega-fit" data-panel="mega-fit">Fit &amp; sizing <img src="assets/icon-chevron-down.svg" alt="" width="12" height="12"></button>
+        <button type="button" class="nav__trigger" aria-expanded="false" aria-controls="mega-story" data-panel="mega-story">Our story <img src="assets/icon-chevron-down.svg" alt="" width="12" height="12"></button>
       </nav>
 
+      <form class="nav__search-field" role="search" action="/search" id="nav-search-form">
+        <img src="assets/icon-search-field.svg" alt="" width="20" height="20">
+        <label class="visually-hidden" for="nav-search-input">Search</label>
+        <input id="nav-search-input" type="search" name="q" placeholder="Search bras, fit guides and help" autocomplete="off">
+        <button type="button" class="icon-btn nav__search-close" aria-label="Close search" data-search-close>
+          <img src="assets/icon-close.svg" alt="" width="20" height="20">
+        </button>
+      </form>
+
       <div class="nav__utilities">
-        <a class="icon-btn nav__search" href="/search" aria-label="Search"><img src="assets/icon-search.svg" alt="" width="20" height="20"></a>
+        <button class="icon-btn nav__search" type="button" aria-label="Search" aria-expanded="false" aria-controls="mega-search" data-search-open><img src="assets/icon-search.svg" alt="" width="20" height="20"></button>
         <a class="icon-btn nav__account" href="/account" aria-label="Account"><img src="assets/icon-account.svg" alt="" width="20" height="20"></a>
         <a class="nav__bag" href="/cart" aria-label="Bag, 0 items">
           <img class="nav__bag-d" src="assets/icon-bag.svg" alt="" width="20" height="20">
@@ -59,14 +70,200 @@
       </div>
     </div>
 
-    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" hidden>
-      <a href="/collections/all">Shop</a>
-      <a href="/pages/how-it-works">How it works</a>
-      <a href="/pages/fit-finder">Fit &amp; sizing</a>
-      <a href="/pages/about-us">Our story</a>
-      <a href="/account">Account</a>
+    <!-- Desktop mega panels -->
+    <div class="mega" aria-hidden="true">
+      <div class="mega__panel" id="mega-shop" role="region" aria-label="Shop">
+        <div class="mega__inner">
+          <div class="mega__col">
+            <p class="mega__label">Bras</p>
+            <a href="/products/yoobra-adore">Yoobra Adore set</a>
+            <a href="/collections/all">Shop all bras</a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__label">Shop by need</p>
+            <a href="/collections/uneven-breasts">Uneven breasts</a>
+            <a href="/collections/after-treatment">After treatment</a>
+            <a href="/collections/changing-bodies">Changing bodies</a>
+          </div>
+          <div class="mega__cards">
+            <a class="mega-card" href="/products/yoobra-adore">
+              <span class="mega-card__media"><img src="assets/system-diagram.jpg" alt="" loading="lazy"></span>
+              <span class="mega-card__title">Yoobra Adore set</span>
+              <span class="mega-card__cta">£84.00 · Shop now <span aria-hidden="true">→</span></span>
+            </a>
+            <a class="mega-card" href="/pages/fit-finder">
+              <span class="mega-card__media"><img src="assets/lace.jpg" alt="" loading="lazy"></span>
+              <span class="mega-card__title">Not sure of your size?</span>
+              <span class="mega-card__cta">Take the Fit Finder <span aria-hidden="true">→</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mega__panel" id="mega-how" role="region" aria-label="How it works">
+        <div class="mega__inner">
+          <div class="mega__col">
+            <p class="mega__label">The system</p>
+            <a href="/pages/how-it-works">How it works</a>
+            <a href="/pages/the-yoobra-design">The Yoobra Design</a>
+            <a href="/pages/how-it-works#yooboost">yooboost™ inserts explained</a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__label">Learn</p>
+            <a href="/pages/asymmetry">Asymmetry is normal</a>
+            <a href="/pages/materials-care">Care &amp; materials</a>
+          </div>
+          <div class="mega__cards">
+            <a class="mega-card" href="/pages/how-it-works">
+              <span class="mega-card__media"><img src="assets/system-diagram.jpg" alt="" loading="lazy"></span>
+              <span class="mega-card__title">One bra. Two adjustable cups.</span>
+              <span class="mega-card__cta">See how it works <span aria-hidden="true">→</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mega__panel" id="mega-fit" role="region" aria-label="Fit and sizing">
+        <div class="mega__inner">
+          <div class="mega__col">
+            <p class="mega__label">Find your fit</p>
+            <a href="/pages/fit-finder">Fit Finder</a>
+            <a href="/pages/fitting-guide">Fitting guide</a>
+            <a href="/pages/size-guide">Size guide</a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__label">Help</p>
+            <a href="/pages/fit-consultation">Book a fit consultation</a>
+            <a href="/pages/delivery-returns">Delivery &amp; returns</a>
+          </div>
+          <div class="mega__cards">
+            <a class="mega-card" href="/pages/fit-finder">
+              <span class="mega-card__media"><img src="assets/clasp-macro.jpg" alt="" loading="lazy"></span>
+              <span class="mega-card__title">Your fit in about 2 minutes</span>
+              <span class="mega-card__cta">Start the Fit Finder <span aria-hidden="true">→</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mega__panel" id="mega-story" role="region" aria-label="Our story">
+        <div class="mega__inner">
+          <div class="mega__col">
+            <p class="mega__label">About</p>
+            <a href="/pages/about-us">About us</a>
+            <a href="/pages/about-us#founder">Founder story</a>
+            <a href="/pages/press">Press</a>
+          </div>
+          <div class="mega__col">
+            <p class="mega__label">Community</p>
+            <a href="/pages/yoobra-sisters">Yoobra Sisters</a>
+            <a href="/pages/yoobra-sisters#stories">Real stories</a>
+          </div>
+          <div class="mega__cards">
+            <a class="mega-card" href="/pages/yoobra-sisters">
+              <span class="mega-card__media"><img src="assets/look-2.jpg" alt="" loading="lazy"></span>
+              <span class="mega-card__title">Meet the Yoobra Sisters</span>
+              <span class="mega-card__cta">Join the community <span aria-hidden="true">→</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mega__panel mega__panel--search" id="mega-search" role="region" aria-label="Search suggestions">
+        <div class="mega__inner">
+          <div class="mega__group mega__group--chips">
+            <p class="mega__label">Popular searches</p>
+            <div class="mega__chips">
+              <a class="chip" href="/pages/fit-finder">Fit Finder</a>
+              <a class="chip" href="/pages/size-guide">Size guide</a>
+              <a class="chip" href="/products/yoobra-adore">Adore</a>
+              <a class="chip" href="/pages/how-it-works#yooboost">yooboost™ inserts</a>
+              <a class="chip" href="/collections/uneven-breasts">Uneven breasts</a>
+              <a class="chip" href="/pages/delivery-returns">Returns</a>
+            </div>
+          </div>
+          <div class="mega__group">
+            <p class="mega__label">Products</p>
+            <a class="search-product" href="/products/yoobra-adore">
+              <span class="search-product__thumb"><img src="assets/system-diagram.jpg" alt="" loading="lazy"></span>
+              <span class="search-product__text"><span>Yoobra Adore set</span><small>£84.00</small></span>
+            </a>
+          </div>
+          <div class="mega__group mega__group--guides">
+            <p class="mega__label">Guides</p>
+            <a class="guide-link" href="/pages/fitting-guide">How to measure without overthinking it</a>
+            <a class="guide-link" href="/pages/body-changes">Your breasts can change — and that is normal</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <nav class="drawer" id="mobile-menu" aria-label="Mobile" hidden>
+      <div class="drawer__list">
+        <div class="drawer__item">
+          <button type="button" class="drawer__toggle" aria-expanded="false" aria-controls="drawer-shop">Shop <img src="assets/icon-chevron-right.svg" alt="" width="16" height="16"></button>
+          <div class="drawer__sub" id="drawer-shop">
+            <div class="drawer__sub-inner">
+              <a href="/products/yoobra-adore">Yoobra Adore set</a>
+              <a href="/collections/all">Shop all bras</a>
+              <a href="/collections/uneven-breasts">Uneven breasts</a>
+              <a href="/collections/after-treatment">After treatment</a>
+              <a href="/collections/changing-bodies">Changing bodies</a>
+            </div>
+          </div>
+        </div>
+        <div class="drawer__item">
+          <button type="button" class="drawer__toggle" aria-expanded="false" aria-controls="drawer-how">How it works <img src="assets/icon-chevron-right.svg" alt="" width="16" height="16"></button>
+          <div class="drawer__sub" id="drawer-how">
+            <div class="drawer__sub-inner">
+              <a href="/pages/how-it-works">How it works</a>
+              <a href="/pages/the-yoobra-design">The Yoobra Design</a>
+              <a href="/pages/how-it-works#yooboost">yooboost™ inserts explained</a>
+              <a href="/pages/asymmetry">Asymmetry is normal</a>
+              <a href="/pages/materials-care">Care &amp; materials</a>
+            </div>
+          </div>
+        </div>
+        <div class="drawer__item">
+          <button type="button" class="drawer__toggle" aria-expanded="false" aria-controls="drawer-fit">Fit &amp; sizing <img src="assets/icon-chevron-right.svg" alt="" width="16" height="16"></button>
+          <div class="drawer__sub" id="drawer-fit">
+            <div class="drawer__sub-inner">
+              <a href="/pages/fit-finder">Fit Finder</a>
+              <a href="/pages/fitting-guide">Fitting guide</a>
+              <a href="/pages/size-guide">Size guide</a>
+              <a href="/pages/fit-consultation">Book a fit consultation</a>
+            </div>
+          </div>
+        </div>
+        <div class="drawer__item">
+          <button type="button" class="drawer__toggle" aria-expanded="false" aria-controls="drawer-story">Our story <img src="assets/icon-chevron-right.svg" alt="" width="16" height="16"></button>
+          <div class="drawer__sub" id="drawer-story">
+            <div class="drawer__sub-inner">
+              <a href="/pages/about-us">About us</a>
+              <a href="/pages/about-us#founder">Founder story</a>
+              <a href="/pages/press">Press</a>
+              <a href="/pages/yoobra-sisters">Yoobra Sisters</a>
+              <a href="/pages/yoobra-sisters#stories">Real stories</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="drawer__foot">
+        <div class="drawer__promo">
+          <p class="drawer__promo-title">Not sure of your size?</p>
+          <p class="drawer__promo-body">Six questions, about two minutes.</p>
+          <a class="btn btn--cream drawer__promo-btn" href="/pages/fit-finder">Find my fit</a>
+        </div>
+        <a class="drawer__account" href="/account"><img src="assets/icon-user.svg" alt="" width="20" height="20">Log in / Create account</a>
+        <div class="drawer__social">
+          <a href="https://www.instagram.com/yoobralife" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.facebook.com/yoobralife" target="_blank" rel="noopener">Facebook</a>
+        </div>
+      </div>
     </nav>
   </header>
+  <div class="nav-scrim" aria-hidden="true"></div>
 
   <main>
 

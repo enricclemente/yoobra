@@ -198,7 +198,7 @@
     // Nav
     if (nav) {
       nav.classList.toggle('is-scrolled', y > 40);
-      const menuOpen = $('.nav__menu-btn')?.getAttribute('aria-expanded') === 'true';
+      const menuOpen = nav.classList.contains('is-open') || nav.classList.contains('is-drawer');
       if (!menuOpen && y > 600 && y > lastY + 4) nav.classList.add('is-hidden');
       else if (y < lastY - 4 || y < 600) nav.classList.remove('is-hidden');
     }

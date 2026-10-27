@@ -1,17 +1,5 @@
 // yoobra homepage – small progressive enhancements
 (function () {
-  // Mobile menu
-  const menuBtn = document.querySelector('.nav__menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  if (menuBtn && menu) {
-    menuBtn.addEventListener('click', () => {
-      const open = menuBtn.getAttribute('aria-expanded') === 'true';
-      menuBtn.setAttribute('aria-expanded', String(!open));
-      menuBtn.setAttribute('aria-label', open ? 'Open menu' : 'Close menu');
-      menu.hidden = open;
-    });
-  }
-
   // Hero video controls (pause/play, mute/unmute) – wire to a <video> when one is added
   document.querySelectorAll('.hero [data-toggle]').forEach((btn) => {
     btn.setAttribute('aria-pressed', 'false');
@@ -165,4 +153,113 @@
   onScroll();
   if (footer) new IntersectionObserver(([e]) => { footerIn = e.isIntersecting; update(); }).observe(footer);
   if (fit) new IntersectionObserver(([e]) => { fitIn = e.isIntersecting; update(); }, { threshold: 0.35 }).observe(fit);
+})();
+
+// Navigation: desktop mega panels, search state, mobile drawer
+(function () {
+  const nav = document.getElementById('site-nav');
+  if (!nav) return;
+  const mega = nav.querySelector('.mega');
+  const scrim = document.querySelector('.nav-scrim');
+  const triggers = Array.from(nav.querySelectorAll('.nav__trigger'));
+  const panels = Array.from(nav.querySelectorAll('.mega__panel'));
+  const searchOpeners = Array.from(nav.querySelectorAll('[data-search-open]'));
+  const searchInput = document.getElementById('nav-search-input');
+  const menuBtn = nav.querySelector('.nav__menu-btn');
+  const drawer = document.getElementById('mobile-menu');
+  const isMobile = () => window.matchMedia('(max-width: 900px)').matches;
+  let current = null, closeTimer = null, openTimer = null;
+
+  const setDrawerTop = () => nav.style.setProperty('--drawer-top', nav.querySelector('.nav__bar').getBoundingClientRect().bottom + 'px');
+
+  function show(id) {
+    clearTimeout(closeTimer);
+    if (current === id) return;
+    const switching = current !== null;
+    mega.classList.toggle('is-switching', switching);
+    panels.forEach((p) => p.classList.toggle('is-open', p.id === id));
+    triggers.forEach((t) => t.setAttribute('aria-expanded', String(t.dataset.panel === id)));
+    searchOpeners.forEach((b) => b.setAttribute('aria-expanded', String(id === 'mega-search')));
+    mega.setAttribute('aria-hidden', 'false');
+    nav.classList.add('is-open');
+    nav.classList.toggle('is-searching', id === 'mega-search');
+    scrim.classList.add('is-visible');
+    current = id;
+  }
+  function hide() {
+    clearTimeout(openTimer);
+    panels.forEach((p) => p.classList.remove('is-open'));
+    triggers.forEach((t) => t.setAttribute('aria-expanded', 'false'));
+    searchOpeners.forEach((b) => b.setAttribute('aria-expanded', 'false'));
+    mega.setAttribute('aria-hidden', 'true');
+    mega.classList.remove('is-switching');
+    nav.classList.remove('is-open', 'is-searching');
+    if (!nav.classList.contains('is-drawer')) scrim.classList.remove('is-visible');
+    document.body.classList.toggle('nav-locked', nav.classList.contains('is-drawer'));
+    current = null;
+  }
+  const scheduleHide = () => { clearTimeout(closeTimer); closeTimer = setTimeout(() => { if (current !== 'mega-search') hide(); }, 280); };
+
+  // Desktop: hover intent + click/keyboard
+  triggers.forEach((t) => {
+    t.addEventListener('mouseenter', () => {
+      if (isMobile()) return;
+      clearTimeout(openTimer);
+      openTimer = setTimeout(() => show(t.dataset.panel), current ? 60 : 140);
+    });
+    t.addEventListener('mouseleave', () => clearTimeout(openTimer));
+    t.addEventListener('click', () => (current === t.dataset.panel ? hide() : show(t.dataset.panel)));
+  });
+  nav.addEventListener('mouseleave', () => { if (!isMobile()) scheduleHide(); });
+  nav.addEventListener('mouseenter', () => clearTimeout(closeTimer));
+  scrim.addEventListener('click', () => { hide(); closeDrawer(); });
+
+  // Search
+  searchOpeners.forEach((b) => b.addEventListener('click', () => {
+    if (current === 'mega-search') return hide();
+    closeDrawer(true);
+    setDrawerTop();
+    show('mega-search');
+    if (isMobile()) document.body.classList.add('nav-locked');
+    setTimeout(() => searchInput && searchInput.focus({ preventScroll: true }), 250);
+  }));
+  nav.querySelectorAll('[data-search-close]').forEach((b) => b.addEventListener('click', () => { hide(); }));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    const wasSearch = current === 'mega-search';
+    const opener = current && triggers.find((t) => t.dataset.panel === current);
+    hide(); closeDrawer();
+    if (opener) opener.focus(); else if (wasSearch) searchOpeners[searchOpeners.length - 1].focus();
+  });
+
+  // Mobile drawer
+  function openDrawer() {
+    hide();
+    setDrawerTop();
+    drawer.hidden = false;
+    requestAnimationFrame(() => {
+      nav.classList.add('is-drawer');
+      menuBtn.setAttribute('aria-expanded', 'true');
+      menuBtn.setAttribute('aria-label', 'Close menu');
+      document.body.classList.add('nav-locked');
+    });
+  }
+  function closeDrawer(instant) {
+    if (!nav.classList.contains('is-drawer')) return;
+    nav.classList.remove('is-drawer');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.setAttribute('aria-label', 'Open menu');
+    document.body.classList.remove('nav-locked');
+    scrim.classList.remove('is-visible');
+    setTimeout(() => { if (!nav.classList.contains('is-drawer')) drawer.hidden = true; }, instant ? 0 : 800);
+  }
+  menuBtn.addEventListener('click', () => (nav.classList.contains('is-drawer') ? closeDrawer() : openDrawer()));
+  drawer.querySelectorAll('.drawer__toggle').forEach((btn) => btn.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    drawer.querySelectorAll('.drawer__toggle').forEach((o) => o.setAttribute('aria-expanded', 'false'));
+    btn.setAttribute('aria-expanded', String(!open));
+  }));
+
+  window.addEventListener('resize', () => { if (!isMobile()) closeDrawer(true); setDrawerTop(); });
 })();

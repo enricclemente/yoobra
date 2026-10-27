@@ -38,8 +38,8 @@
 .motion .nav.is-hidden { transform: translateY(-110%); }
 .motion .nav__bar { transition: height .9s var(--ease-out), box-shadow .9s var(--ease-out); }
 .motion .nav.is-scrolled .nav__bar { height: 60px; box-shadow: 0 10px 30px rgba(64, 15, 31, 0.18); }
-.motion .nav__menu a { position: relative; transition: color var(--t-hover) var(--ease-silk); }
-.motion .nav__menu a::after {
+.motion .nav__menu a.__unused { position: relative; transition: color var(--t-hover) var(--ease-silk); }
+.motion .nav__menu a.__unused::after {
   content: "";
   position: absolute;
   left: 0; right: 18px; bottom: 4px;
@@ -49,7 +49,7 @@
   transform-origin: right;
   transition: transform var(--t-hover) var(--ease-silk);
 }
-.motion .nav__menu a:hover::after { transform: scaleX(1); transform-origin: left; }
+.motion .nav__menu a.__unused:hover::after { transform: scaleX(1); transform-origin: left; }
 
 /* --------------------------------------------------------------------------
    Headlines: words rise from behind a mask, unhurried
@@ -350,7 +350,7 @@ html:not(.motion) .scroll-cue { display: none; }
 .motion .btn:hover img { transform: translateX(5px); }
 
 /* Nav links brighten */
-.motion .nav__menu a:hover { color: #fff; }
+.motion .nav__menu a.__unused:hover { color: #fff; }
 .motion .nav__utilities .icon-btn img,
 .motion .nav__bag img { transition: opacity .6s var(--ease-silk), transform .8s var(--ease-silk); }
 .motion .nav__utilities .icon-btn:hover img,
