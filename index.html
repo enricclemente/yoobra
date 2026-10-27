@@ -8,7 +8,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
-  <script>if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');</script>
+  <script>
+    // Always start at the top on refresh so the intro and reveals play from the beginning
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    if (!location.hash) window.scrollTo(0, 0);
+    window.addEventListener('pageshow', function () { if (!location.hash) window.scrollTo(0, 0); });
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
+  </script>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="motion.css">
 </head>

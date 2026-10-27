@@ -152,18 +152,21 @@
     const target = parseInt(stat.textContent, 10) || 0;
     stat.setAttribute('aria-label', stat.textContent);
     stat.textContent = '0%';
+    // Counts up every time the stat comes into view (resets once it has fully left)
+    let raf = null;
     const sio = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return;
-      sio.disconnect();
-      const t0 = performance.now(), dur = 2600;
+      if (e.intersectionRatio === 0) { cancelAnimationFrame(raf); stat.textContent = '0%'; return; }
+      if (e.intersectionRatio < 0.6 || stat.dataset.counting) return;
+      stat.dataset.counting = '1';
+      const t0 = performance.now() + 300, dur = 2600;
       const tick = (t) => {
-        const p = Math.min(1, (t - t0) / dur);
+        const p = Math.max(0, Math.min(1, (t - t0) / dur));
         const eased = 1 - Math.pow(1 - p, 4);
         stat.textContent = Math.round(target * eased) + '%';
-        if (p < 1) requestAnimationFrame(tick);
+        if (p < 1) raf = requestAnimationFrame(tick); else delete stat.dataset.counting;
       };
-      requestAnimationFrame(tick);
-    }, { threshold: 0.6 });
+      raf = requestAnimationFrame(tick);
+    }, { threshold: [0, 0.6] });
     sio.observe(stat);
   }
 
