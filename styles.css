@@ -1303,3 +1303,22 @@ body.has-sticky-cta .whatsapp { bottom: 112px; }
   .detail-card__title { font-size: 18px; }
   .detail-card__body { font-size: 13px; }
 }
+
+/* --------------------------------------------------------------------------
+   Mobile image ratios: two consistent formats instead of ad-hoc heights
+   · Portrait 4:5 for product, people and detail photography
+   · Landscape 4:3 for wide product shots
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .look-card__media,
+  .founder__image,
+  .insta-post,
+  .detail-card--hero,
+  .details__grid .detail-card { height: auto; aspect-ratio: 4 / 5; }
+
+  .edu__media,
+  .manifesto__band,
+  .system__media { height: auto; min-height: 0; aspect-ratio: 4 / 3; }
+
+  .details__grid { grid-auto-rows: auto; }
+}
