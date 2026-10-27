@@ -146,19 +146,6 @@
   }
 
   /* ------------------------------------------------------------------
-     5. Marquee band (inserted after the hero)
-     ------------------------------------------------------------------ */
-  const phrases = ['Because no two are the same', 'One bra', 'Two independently adjustable cups', 'Customise each cup', 'Designed by women, for women', 'Shaped by you'];
-  if (hero) {
-    const band = document.createElement('div');
-    band.className = 'marquee';
-    band.setAttribute('aria-hidden', 'true');
-    const group = '<div class="marquee__group">' + phrases.map((p) => `<span class="marquee__item">${p}<img src="assets/rings-peach.svg" alt=""></span>`).join('') + '</div>';
-    band.innerHTML = `<div class="marquee__track">${group}${group}</div>`;
-    hero.after(band);
-  }
-
-  /* ------------------------------------------------------------------
      6. Count-up for the 94% stat
      ------------------------------------------------------------------ */
   const stat = $('.edu__stat');
@@ -193,17 +180,15 @@
   const heroStatement = $('.hero__statement');
   const theatre = $('.theatre');
   const theatreMedia = $('.theatre__media');
-  const track = $('.marquee__track');
   const parallax = $$('.edu__media .slides, .manifesto__band > .slides, .look-card__media .slides, .founder__image img, .system__media .media-card__img');
   parallax.forEach((el) => el.setAttribute('data-parallax', ''));
 
-  let lastY = window.scrollY, ticking = false, marqueeX = 0, velocity = 0, lastT = performance.now();
+  let lastY = window.scrollY;
 
   function frame(now) {
     const y = window.scrollY;
     const vh = window.innerHeight;
     const docH = document.documentElement.scrollHeight - vh;
-    const dt = Math.min(64, now - lastT); lastT = now;
 
     progress.style.transform = `scaleX(${docH > 0 ? y / docH : 0})`;
 
@@ -245,18 +230,6 @@
         theatreMedia.style.setProperty('--ts', (1.25 - e * 0.25).toFixed(4));
         theatreMedia.style.transform = `scale(${(1.25 - e * 0.25).toFixed(4)}) translate3d(0, ${((r.top / vh) * 40).toFixed(1)}px, 0)`;
       }
-    }
-
-    // Marquee: constant drift that speeds up with scroll velocity
-    if (track) {
-      const v = (y - lastY) / Math.max(1, dt);
-      velocity += (v - velocity) * 0.1;
-      const dir = velocity < -0.02 ? -1 : 1;
-      marqueeX -= (0.04 + Math.min(2, Math.abs(velocity)) * 0.5) * dt * dir;
-      const w = track.scrollWidth / 2;
-      if (marqueeX <= -w) marqueeX += w;
-      if (marqueeX > 0) marqueeX -= w;
-      track.style.transform = `translate3d(${marqueeX.toFixed(1)}px, 0, 0)`;
     }
 
     lastY = y;

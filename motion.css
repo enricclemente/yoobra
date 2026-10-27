@@ -154,37 +154,6 @@ html:not(.motion) .hero__tiles { display: none; }
 html:not(.motion) .scroll-cue { display: none; }
 
 /* --------------------------------------------------------------------------
-   Marquee band
-   -------------------------------------------------------------------------- */
-.marquee {
-  position: relative;
-  overflow: hidden;
-  background: var(--plum-900);
-  color: var(--cream);
-  padding: 22px 0;
-  border-block: 1px solid rgba(255, 248, 245, 0.08);
-}
-.marquee__track { display: flex; width: max-content; will-change: transform; }
-.marquee__group { display: flex; align-items: center; flex: none; }
-.marquee__item {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  padding-right: 40px;
-  font-size: 34px;
-  line-height: 1;
-  letter-spacing: -0.5px;
-  white-space: nowrap;
-}
-.marquee__item:nth-child(even) { color: var(--peach); font-style: normal; }
-.marquee__item img { width: 42px; height: 24px; opacity: .8; }
-@media (max-width: 900px) {
-  .marquee { padding: 16px 0; }
-  .marquee__item { font-size: 22px; gap: 24px; padding-right: 24px; }
-  .marquee__item img { width: 32px; height: 18px; }
-}
-
-/* --------------------------------------------------------------------------
    Annotations draw in
    -------------------------------------------------------------------------- */
 .motion .anno__label { opacity: 0; transform: translateY(-8px); transition: opacity .6s ease, transform .8s var(--ease-out); transition-delay: var(--d, 0ms); }
@@ -322,7 +291,6 @@ html:not(.motion) .scroll-cue { display: none; }
    Reduced motion: hard stop
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
-  .marquee__track { transform: none !important; }
   .scroll-progress, .scroll-cue { display: none; }
 }
 
