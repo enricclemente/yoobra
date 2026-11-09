@@ -1003,7 +1003,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .nav__cta { padding: 10px 16px; font-size: 11px; letter-spacing: 1.98px; }
 
   /* Hero */
-  .hero { height: 640px; padding: 0 20px 24px; }
+  .hero { height: 560px; padding: 0 20px 24px; }
+  .hero__media { object-position: 50% 50%; }
   .hero__media { inset: 0; width: 100%; }
   .hero__statement { gap: 24px; }
   .hero__title { font-size: 45px; line-height: 1; letter-spacing: -1.1px; }
