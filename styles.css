@@ -236,7 +236,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .hero {
   position: relative;
-  height: 780px;
+  height: 680px;
   overflow: hidden;
   background: var(--plum-700);
   display: flex;
